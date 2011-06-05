@@ -1,0 +1,82 @@
+# define some colours
+GREY=$'\033[1;30m'
+RED=$'\033[1;31m'
+GREEN=$'\033[1;32m'
+YELLOW=$'\033[1;33m'
+BLUE=$'\033[1;34m'
+MAGENTA=$'\033[1;35m'
+CYAN=$'\033[1;36m'
+WHITE=$'\033[1;37m'
+NONE=$'\033[m'
+ 
+# trims long paths down to 80 chars
+_get_path(){
+  local x=$(pwd | sed -e "s:$HOME:~:")
+  local len=${#x}
+  local max=80
+  if [ $len -gt $max ]
+  then
+      echo ...${x:((len-max+3))}
+  else
+      echo ${x}
+  fi
+}
+ 
+# prints a colour coded exit status
+_get_exit_status(){
+   local es=$?
+   if [ $es -eq 0 ]
+   then
+       echo -e "${GREEN}${es}"
+   else
+       echo -e "${RED}${es}"
+   fi
+}
+ 
+# change xterm title
+title() {
+   if [ $# -eq 0 ]
+   then
+      title=""
+   else
+      title="$* - "
+   fi
+}
+ 
+# colour the host red if it is production
+# all prod hostnames end with "prod"
+if [[ $HOSTNAME =~ prod$ ]]
+then
+    HOST_COLOR=$RED
+else
+    HOST_COLOR=$GREEN
+fi
+ 
+# colour the user red if it is production
+# all prod usernames end with "prod"
+if [[ $USER =~ prod$ ]]
+then
+    USER_COLOR=$RED
+else
+    USER_COLOR=$GREEN
+fi
+ 
+#executed just before prompt
+PROMPT_COMMAND='exitStatus=$(_get_exit_status);mydir=$(_get_path);'
+ 
+PS1='\033]0;${title}\u@\h:`tty`>${mydir}\007\n\
+\[${GREY}\][\[${BLUE}\]\t\[${GREY}\]]\
+\[${GREY}\][\[${USER_COLOR}\]\u\[${GREY}\]@\[${HOST_COLOR}\]\H\[${GREY}\]] \
+\[${WHITE}\]${mydir} \
+\[${GREY}\](\
+\[${YELLOW}\]+${SHLVL}\[${GREY}\]|\
+\[${YELLOW}\]%\j\[${GREY}\]|\
+\[${YELLOW}\]!\!\[${GREY}\]|\
+\[${YELLOW}\]${exitStatus}\[${GREY}\])\[${NONE}\]\n\
+\[${USER_COLOR}\]$\[${NONE}\] '
+ 
+# continuation prompt
+PS2='\[${USER_COLOR}\]>\[${NONE}\] '
+ 
+#used by set -x for tracing
+PS4='\[${USER_COLOR}\]+\[${NONE}\] '
