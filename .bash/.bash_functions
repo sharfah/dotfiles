@@ -75,7 +75,7 @@ emailme(){
         echo Usage: emailme text
         return 1
     fi
-    echo "$@" | mailx -s "$@" fahds
+    echo "$@" | mailx -s "$@" $USER
     echo "Sent email"
 }
 
