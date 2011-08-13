@@ -36,22 +36,24 @@ title() {
    fi
 }
 
-# check if this is a prod server
-HOST_COLOR=$GREEN
-if hostname | grep -q prod
+# colour the host red if it is production
+# all prod hostnames end with "prod"
+if [[ $HOSTNAME =~ prod$ ]]
 then
     HOST_COLOR=$RED
+else
+    HOST_COLOR=$GREEN
 fi
 
 
-# check if this is a prod user
+# colour the user red if it is production
+# all prod usernames end with "prod"
 if [[ $USER =~ prod$ ]]
 then
     USER_COLOR=$RED
 else
     USER_COLOR=$GREEN
 fi
-
 
 #executed just before prompt
 PROMPT_COMMAND='exitStatus=$(_get_exit_status);mydir=$(_get_path);'
