@@ -1,0 +1,7 @@
+_fs()
+{
+    local cur=${COMP_WORDS[COMP_CWORD]}
+    COMPREPLY=( $( compgen -W "apropos checkservers checkvolumes cleanacl copyacl diskfree examine exportafs flush flushmount flushvolume getcacheparms getcellstatus getclientaddrs getcrypt getserverprefs help listacl listaliases listcells listquota lsmount messages mkmount newalias newcell quota rmmount rxstatpeer rxstatproc setacl setcachesize setcell setclientaddrs setcrypt setquota setserverprefs setvol storebehind sysname whereis whichcell wscell" -- $cur ) )
+}
+
+complete -F _fs fs

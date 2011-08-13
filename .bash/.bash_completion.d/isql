@@ -1,0 +1,40 @@
+_isql()
+{
+        local cur=${COMP_WORDS[COMP_CWORD]}
+	local prev=${COMP_WORDS[COMP_CWORD-1]}
+
+        # completing an option
+	if [[ "$cur" == -* ]]; then
+		COMPREPLY=( $( compgen -W "- -b -e -F -p -n -v -X -Y -Q -a -A -c -D -E \
+		  -h -H -i -I -J -K -l -m -M -o -P -R -s -S -t -U -V -w -z -Z" -- $cur ) )
+        elif [ "$prev" == "-S" ]
+        then
+               COMPREPLY=( $( compgen -W '$(grep ^[A-Z] $SYBASE/interfaces)' -- $cur ) )
+        fi
+}
+complete -F _isql isql
+
+
+_fsql()
+{
+        local cur=${COMP_WORDS[COMP_CWORD]}
+	local prev=${COMP_WORDS[COMP_CWORD-1]}
+
+	case "$prev" in
+	-S)
+		COMPREPLY=( $( compgen -W '$(grep ^[A-Z] $SYBASE/interfaces)' -- $cur ) )
+		return 0
+		;;
+	-f|-a|-o)
+		_filedir
+		return 0
+		;;
+	esac
+
+        # completing an option
+	if [[ "$cur" == -* ]]; then
+		COMPREPLY=( $( compgen -W "- -D -H -I -P -R -S -U -h -u -v -e -E -m \
+		             -F -N -c -f -a -o -p -T -X -x -b -l -s -t -w" -- $cur ) )
+        fi
+}
+complete -F _fsql $filenames fsql

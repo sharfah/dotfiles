@@ -1,0 +1,154 @@
+_vms()
+{
+vmscommands=$(cat << EOF
+archive project _metaproj_ _project_
+audit build _metaproj_ _project_ _release_ _cell_
+audit canonlinks _type_
+audit install _metaproj_ _project_ _release_ _class_
+audit metaproj _metaproj_
+audit project _metaproj_ _project_
+audit release _metaproj_ _project_ _release_
+audit subscription _metaproj_ _project_ 
+autopurge _metaproj_ _project_ _release_ 
+build rlink _metaproj_ _project_
+cancel _batchid_ 
+chown _path_ _user_ _group_ 
+clone release _metaproj_ _project_ _existingrel_ _release_
+cmcheck _vms_command_
+configure _element_ _version_ _field_ _value_ 
+create build _metaproj_ _project_ _release_ _cell_ _subdir_ 
+create buildlink _metaproj_ _project_ _from_cell_ _to_cell_
+create cell _target_
+create classlinks _metaproj_ _project_ 
+create group _group_ _where_ _quota_ 
+create install _metaproj_ _project_ _release_ _class_
+create installlinks _metaproj_ _project_ _release_
+create metaproj _metaproj_
+create project _metaproj_ _project_ _where_ 
+create release _metaproj_ _project_ _release_
+create rootvol _target_ _rootvol_
+create user _username_ _where_ _quota_ 
+define campus _campus_ _description_
+define campuscell _campus_ _campuscell_ _type_
+define cell _cell_
+define cellclass _cell_ _class_
+define metaproj _metaproj_ _state_
+define metaversion _metaproj_ _version_
+define project _metaproj_ _project_ _state_
+define subscription _where_ _metaproj_ _project_
+define target _target_ _type_
+define vmsserver _server_ _type_ _version_
+destroy cell _cell_
+destroy group _group_
+destroy install _metaproj_ _project_ _release_ _class_
+destroy metaproj _metaproj_
+destroy project _metaproj_ _project_
+destroy release _metaproj_ _project_ _release_
+destroy user _username_
+disable cell _cells_ _scope_ _reason_
+disable server _server_ _reason_
+display autopurge _metaproj_ _project_ _release_ 
+display buildlink _metaproj_ _project_ _cell_
+display campus _campus_ 
+display campuscell _campus_ _cell_ 
+display cell _cell_ 
+display cellclass _cell_
+display config _element_ _version_ _field_ 
+display default _metaproj_
+display defaultquota _metaproj_ _project_ 
+display distexclusion _metaproj_ 
+display eonid _metaproj_ _project_ 
+display errorlog
+display lastaccess _metaproj_ _project_ _release_ 
+display locks
+display logfile _batchid_ 
+display metaproj _metaproj_ 
+display metaversion
+display options _metaproj_ _project_ _release_ 
+display project _metaproj_ _project_ 
+display releaselinks _metaproj_ _project_ _release_ 
+display releasetag _metaproj_ _project_ _release_ 
+display server _cell_ 
+display subscription _where_ _metaproj_ _project_ 
+display systemgrn _metaproj_ _project_ 
+display target _target_ _type_ 
+display targets _metaproj_ _project_ _release_ 
+display vmsserver _server_ _type_ _version_ 
+display volume _volname_ 
+dist _metaproj_ _project_ _release_ 
+enable cell _cells_
+enable server _server_
+expunge metaproj _metaproj_
+expunge project _metaproj_ _project_
+expunge release _metaproj_ _project_ _release_
+freezedist _metaproj_ _project_ _release_ 
+history any
+history authuser _authuser_
+history campus _campus_
+history cell _cell_
+history group _group_
+history logfile _id_
+history metaproj _metaproj_
+history project _metaproj_ _project_
+history release _metaproj_ _project_ _release_
+history server _server_
+history user _username_
+history version _version_
+history vmsserver _vmsserver_
+history volume _volume_
+listacl _path_
+lock release _metaproj_ _project_ _release_ -verbose -norecurse -query _subdirs_ 
+move canon _volname_ _destination_
+move group _group_ _source_ _destination_
+move metaproj _metaproj_ _destination_
+move project _metaproj_ _project_ _source_ _destination_
+move user _username_ _destination_
+move volume _volname_
+multidist _metaproj_
+purge _metaproj_ _project_ _release_ _class_ 
+recover group _group_
+recover project _metaproj_ _project_
+recover release _metaproj_ _project_ _release_
+recover user _username_
+remove _metaproj_ _project_ _release_ 
+set _option_ _metaproj_ _project_ _release_ _values_ 
+set defaultquota _metaproj_ _project_ _quota_ 
+set releasetag _metaproj_ _project_ _release_ _tag_
+set server _server_ _status_ _reason_ 
+set systemgrn _metaproj_ _project_ _systemgrn_
+setquota _path_ _quota_
+sync campus _campus_ _metaproj_ _project_ _release_ 
+thawdist _metaproj_ _project_ _release_ 
+turnover default _metaproj_ _project_ _release_ 
+turnover defaultlink _metaproj_ _default_ _dlink_
+turnover group _group_
+turnover release _metaproj_ _project_ _release_
+turnover releaselink _metaproj_ _project_ _release_ _rlink_
+turnover volume _volume_
+undef campus _campus_
+undef campuscell _campus_ _campuscell_
+undef cell _cell_
+undef cellclass _cell_ _class_
+undef metaproj _metaproj_
+undef project _metaproj_ _project_
+undef subscription _where_ _metaproj_ _project_
+undef vmsserver _server_
+unlock release _metaproj_ _project_ _release_ -verbose -norecurse -query _subdirs_ 
+unlock volume _volume_
+wait for _batchid_
+EOF
+)
+	COMPREPLY=()
+	cur=${COMP_WORDS[COMP_CWORD]}
+	prev=${COMP_WORDS[COMP_CWORD-1]}
+	if [ $COMP_CWORD -eq 1 ]; then
+		COMPREPLY=( $( compgen -W "$(echo "${vmscommands}"| cut -d' ' -f1)" -- $cur ) )
+	elif [ $COMP_CWORD -eq 2 ]; then
+	        COMPREPLY=( $( compgen -W "$(echo "${vmscommands}"| grep "^$prev" | cut -d' ' -f2)" -- $cur ) )
+	elif [ $COMP_CWORD -gt 2 ]; then
+	        COMPREPLY=( $( compgen -W "$(echo "${vmscommands}"| grep "^${COMP_WORDS[1]} " | grep " ${COMP_WORDS[2]} " | cut -d' ' -f${COMP_CWORD})" -- $cur ) )
+	fi
+        return 0
+}
+
+complete -F _vms vms
