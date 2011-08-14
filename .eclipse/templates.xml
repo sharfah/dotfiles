@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><templates><template autoinsert="true" context="java-statements" deleted="false" description="parse xml string as Document" enabled="true" name="xml">${:import(org.w3c.dom.Document,&#13;
+          javax.xml.parsers.DocumentBuilderFactory,&#13;
+          org.xml.sax.InputSource,&#13;
+          java.io.StringReader,&#13;
+          java.io.IOException,&#13;
+          javax.xml.parsers.ParserConfigurationException,&#13;
+          org.xml.sax.SAXException)}&#13;
+Document doc = null;&#13;
+try {&#13;
+	doc = DocumentBuilderFactory.newInstance()&#13;
+			.newDocumentBuilder()&#13;
+			.parse(new InputSource(new StringReader(${str:var(String)})));&#13;
+} catch (SAXException | IOException | ParserConfigurationException e) {&#13;
+	// ${todo}: handle exception&#13;
+}&#13;
+${cursor}</template></templates>
