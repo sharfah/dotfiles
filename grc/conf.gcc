@@ -1,0 +1,33 @@
+# 
+regexp=\bgcc\b
+colours=yellow
+count=more
+.........
+# 
+regexp=^.*?:
+colours=red
+count=once
+.........
+# 
+regexp=\`\w+\'
+colours=green
+.........
+# -O
+regexp=\-O\d 
+colours=green
+.........
+# -o
+regexp=\-o\s.+\b
+colours=yellow
+.........
+# warning and error won't work, unless you redirect also
+# stderr to grcat 
+#
+# warning
+regexp=warning
+colours=yellow
+.........
+# error
+regexp=error
+colours=red blink
+count=stop
