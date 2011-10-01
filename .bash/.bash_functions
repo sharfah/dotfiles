@@ -309,6 +309,18 @@ diffsort(){
     diff -wb <(sort $1) <(sort $2)    
 }
 
+#
+# Diffs xml files. 
+# Formats them using xmllint and then invokes diff.
+#
+diffxml(){
+    if [ $# -lt 2 ]; then
+        echo "Usage: diffxml xmlfile1 xmlfile2"
+        return 1
+    fi
+    diff -wb <(xmllint --format $1) <(xmllint --format $2)
+}
+
 #-------------------------------
 # Directory Bookmark Functions
 #-------------------------------
