@@ -1,0 +1,34 @@
+#! /bin/bash
+# CSV Viewer
+# http://fahdshariff.blogspot.com/2011/07/viewing-csv-files.html
+# Usage: csv [-d delim] filename
+# default delimiter is pipe.
+#
+# Input file:
+# h1|h2|h3
+# v1|v2|v3
+# w1|w2|w3
+#
+# Output:
+# h1: v1
+# h2: v2
+# h3: v3
+#
+# h1: w1
+# h2: w2
+# h3: w3
+
+delim=|
+while getopts "d:" OPTION
+do
+   case $OPTION in
+     d) delim=$OPTARG; shift $((OPTIND-1)) ;;
+   esac
+done
+
+if [ $# -eq 0 ]
+then
+    echo "Usage: csv [-d delim] filename" >&2
+    exit 1
+fi
+awk -F "$delim" '{if(NR==1)split($0,arr);else for(i=1;i<=NF;i++)print arr[i]":"$i;print "";}' "$1"
