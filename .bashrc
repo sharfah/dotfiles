@@ -2,6 +2,12 @@
 # bashrc
 #
 
+if [[ "$TERM" != "screen" ]]
+then
+   # try to attach to existing session, or start a new one
+   tmux -2 attach-session -t "$USER" || tmux -2 new-session -s "$USER"
+   exit
+fi
 export HOSTFILE=~/.hosts
 export PATH=$PATH:~/bin
 
@@ -58,7 +64,7 @@ export ANT_ARGS='-logger org.apache.tools.ant.listener.AnsiColorLogger'
 export CDPATH=".::..:../..:~/:~/dev/"
 
 . ~/.bash/.bash_prompt
-. ~/.bash/.bash_completion
+. ~/.bash/.bash_dyncompletion
 . ~/.bash/.bash_aliases
 . ~/.bash/.bash_functions
 export INPUTRC=~/.bash/.bash_inputrc
