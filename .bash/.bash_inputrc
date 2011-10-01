@@ -22,9 +22,10 @@ set visible-stats On
 "\e[A": history-search-backward
 
 # Use Ctrl or Alt Arrow keys to move along words
-"\C-[OD" backward-word
-"\C-[OC" forward-word
-"\e\e[C": forward-word
-"\e\e[D": backward-word
+# Disabled - doesn't work well with tmux.
+#"\C-[OD" backward-word
+#"\C-[OC" forward-word
+#"\e\e[C": forward-word
+#"\e\e[D": backward-word
 
 "\M-r": forward-search-history
