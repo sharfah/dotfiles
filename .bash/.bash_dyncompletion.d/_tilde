@@ -1,0 +1,10 @@
+_tilde () 
+{ 
+    local result=0;
+    if [[ ${1:0:1} == "~" && $1 == ${1//\/} ]]; then
+        _compopt_o_filenames;
+        COMPREPLY=($( compgen -P '~' -u "${1#\~}" ));
+        result=${#COMPREPLY[@]};
+    fi;
+    return $result
+}

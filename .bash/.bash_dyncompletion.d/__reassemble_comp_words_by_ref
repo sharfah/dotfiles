@@ -1,0 +1,25 @@
+__reassemble_comp_words_by_ref () 
+{ 
+    local exclude i j ref;
+    if [[ -n $1 ]]; then
+        exclude="${1//[^$COMP_WORDBREAKS]}";
+    fi;
+    eval $3=$COMP_CWORD;
+    if [[ -n $exclude ]]; then
+        for ((i=0, j=0; i < ${#COMP_WORDS[@]}; i++, j++))
+        do
+            while [[ $i -gt 0 && -n ${COMP_WORDS[$i]} && ${COMP_WORDS[$i]//[^$exclude]} == ${COMP_WORDS[$i]} ]]; do
+                [ $j -ge 2 ] && ((j--));
+                ref="$2[$j]";
+                eval $2[$j]=\${!ref}\${COMP_WORDS[i]};
+                [ $i = $COMP_CWORD ] && eval $3=$j;
+                (( $i < ${#COMP_WORDS[@]} - 1)) && ((i++)) || break 2;
+            done;
+            ref="$2[$j]";
+            eval $2[$j]=\${!ref}\${COMP_WORDS[i]};
+            [[ $i == $COMP_CWORD ]] && eval $3=$j;
+        done;
+    else
+        eval $2=\( \"\${COMP_WORDS[@]}\" \);
+    fi
+}

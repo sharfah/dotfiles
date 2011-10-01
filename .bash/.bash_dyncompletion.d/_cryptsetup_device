@@ -1,0 +1,5 @@
+_cryptsetup_device () 
+{ 
+    cur=${cur:=/dev/};
+    _filedir
+}

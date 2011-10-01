@@ -1,0 +1,4 @@
+_screen_sessions () 
+{ 
+    COMPREPLY=($( compgen -W "$( command screen -ls | sed -ne         's|^\t\{1,\}\([0-9]\{1,\}\.[^\t]\{1,\}\).*'"$1"'.*$|\1|p' )"         -- "$cur" ))
+}

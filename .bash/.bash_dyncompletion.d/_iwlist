@@ -1,0 +1,17 @@
+_iwlist () 
+{ 
+    local cur prev;
+    COMPREPLY=();
+    _get_comp_words_by_ref cur prev;
+    if [ $COMP_CWORD -eq 1 ]; then
+        if [[ "$cur" == -* ]]; then
+            COMPREPLY=($( compgen -W '--help --version' -- "$cur" ));
+        else
+            _available_interfaces -w;
+        fi;
+    else
+        COMPREPLY=($( compgen -W 'scan scanning freq frequency \
+            channel rate bit bitrate key enc encryption power \
+            txpower retry ap accesspoint peers event' -- "$cur" ));
+    fi
+}

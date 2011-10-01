@@ -1,0 +1,16 @@
+_vipw () 
+{ 
+    local cur prev;
+    COMPREPLY=();
+    _get_comp_words_by_ref cur prev;
+    case $prev in 
+        -h | --help)
+            return 0
+        ;;
+    esac;
+    if [[ "$cur" == -* ]]; then
+        COMPREPLY=($( compgen -W '--group --help --passwd \
+            --quiet --shadow' -- "$cur" ));
+        return 0;
+    fi
+}

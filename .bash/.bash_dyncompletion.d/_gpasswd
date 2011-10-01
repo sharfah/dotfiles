@@ -1,0 +1,17 @@
+_gpasswd () 
+{ 
+    local cur prev;
+    COMPREPLY=();
+    _get_comp_words_by_ref cur prev;
+    case $prev in 
+        -a | -d | -A | -M)
+            COMPREPLY=($( compgen -u -- "$cur" ));
+            return 0
+        ;;
+    esac;
+    if [[ "$cur" == -* ]]; then
+        COMPREPLY=($( compgen -W '-a -d -r -R -A -M' -- "$cur" ));
+        return 0;
+    fi;
+    COMPREPLY=($( compgen -g -- "$cur" ))
+}

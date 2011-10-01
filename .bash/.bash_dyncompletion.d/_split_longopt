@@ -1,0 +1,9 @@
+_split_longopt () 
+{ 
+    if [[ "$cur" == --?*=* ]]; then
+        prev="${cur%%?(\\)=*}";
+        cur="${cur#*=}";
+        return 0;
+    fi;
+    return 1
+}

@@ -1,0 +1,12 @@
+_allowed_users () 
+{ 
+    if _complete_as_root; then
+        local IFS='
+';
+        COMPREPLY=($( compgen -u -- "${1:-$cur}" ));
+    else
+        local IFS='
+ ';
+        COMPREPLY=($( compgen -W             "$( id -un 2>/dev/null || whoami 2>/dev/null )" -- "${1:-$cur}" ));
+    fi
+}

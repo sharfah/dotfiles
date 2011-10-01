@@ -1,0 +1,10 @@
+_count_args () 
+{ 
+    local i cword words;
+    __reassemble_comp_words_by_ref "$1" words cword;
+    args=1;
+    for i in "${words[@]:1:cword-1}";
+    do
+        [[ "$i" != -* ]] && args=$(($args+1));
+    done
+}

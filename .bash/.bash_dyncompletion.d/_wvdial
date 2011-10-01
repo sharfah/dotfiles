@@ -1,0 +1,32 @@
+_wvdial () 
+{ 
+    local cur prev config i IFS='
+';
+    COMPREPLY=();
+    _get_comp_words_by_ref cur prev;
+    case $prev in 
+        --config)
+            _filedir;
+            return 0
+        ;;
+    esac;
+    case $cur in 
+        -*)
+            COMPREPLY=($( compgen -W '--config --chat \
+                --remotename --help --version --no-syslog'                 -- "$cur" ))
+        ;;
+        *)
+            config="/etc/wvdial.conf"'
+'"$HOME/.wvdialrc";
+            for ((i=1; i < COMP_CWORD; i++ ))
+            do
+                if [[ "${COMP_WORDS[i]}" == "--config" ]]; then
+                    config=${COMP_WORDS[i+1]};
+                    break;
+                fi;
+            done;
+            COMPREPLY=($( sed -ne "s|^\[Dialer \($cur.*\)\]$|\1|p" $config                 2>/dev/null | command grep -v '^Defaults$'));
+            COMPREPLY=${COMPREPLY// /\\ }
+        ;;
+    esac
+}

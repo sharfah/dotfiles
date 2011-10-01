@@ -1,0 +1,14 @@
+_realcommand () 
+{ 
+    type -P "$1" > /dev/null && { 
+        if type -p realpath > /dev/null; then
+            realpath "$(type -P "$1")";
+        else
+            if type -p readlink > /dev/null; then
+                readlink -f "$(type -P "$1")";
+            else
+                type -P "$1";
+            fi;
+        fi
+    }
+}

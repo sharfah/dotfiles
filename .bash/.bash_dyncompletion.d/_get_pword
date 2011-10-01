@@ -1,0 +1,6 @@
+_get_pword () 
+{ 
+    if [ $COMP_CWORD -ge 1 ]; then
+        _get_cword "${@:-}" 1;
+    fi
+}

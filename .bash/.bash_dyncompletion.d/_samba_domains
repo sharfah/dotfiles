@@ -1,0 +1,6 @@
+_samba_domains () 
+{ 
+    if [ -n "${COMP_SAMBA_SCAN:-}" ]; then
+        COMPREPLY=($( compgen -W '$( smbtree -N -D )' -- "$cur" ));
+    fi
+}

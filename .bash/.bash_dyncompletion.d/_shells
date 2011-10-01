@@ -1,0 +1,4 @@
+_shells () 
+{ 
+    COMPREPLY=("${COMPREPLY[@]}" $( compgen -W         '$( command grep "^[[:space:]]*/" /etc/shells 2>/dev/null )'         -- "$cur" ))
+}

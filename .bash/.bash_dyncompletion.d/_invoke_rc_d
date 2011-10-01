@@ -1,0 +1,22 @@
+_invoke_rc_d () 
+{ 
+    local cur prev sysvdir services options valid_options;
+    _get_comp_words_by_ref cur prev;
+    [ -d /etc/rc.d/init.d ] && sysvdir=/etc/rc.d/init.d || sysvdir=/etc/init.d;
+    services=($( printf '%s '         $sysvdir/!(README*|*.sh|*.dpkg*|*.rpm@(orig|new|save)) ));
+    services=(${services[@]#$sysvdir/});
+    options=(--help --quiet --force --try-anyway --disclose-deny --query --no-fallback);
+    if [[ ( $COMP_CWORD -eq 1 ) || ( "$prev" == --* ) ]]; then
+        valid_options=($(         tr " " "\n" <<<"${COMP_WORDS[@]} ${options[@]}"         | sed -ne "/$( sed "s/ /\\\\|/g" <<<"${options[@]}" )/p"         | sort | uniq -u         ));
+        COMPREPLY=($( compgen -W '${valid_options[@]} ${services[@]}' -- "$cur" ));
+    else
+        if [ -x $sysvdir/$prev ]; then
+            COMPREPLY=($( compgen -W '`sed -e "y/|/ /" \
+            -ne "s/^.*Usage:[ ]*[^ ]*[ ]*{*\([^}\"]*\).*$/\1/p" \
+            $sysvdir/$prev`' -- "$cur" ));
+        else
+            COMPREPLY=();
+        fi;
+    fi;
+    return 0
+}

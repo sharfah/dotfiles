@@ -1,0 +1,6 @@
+_bluetooth_adresses () 
+{ 
+    if [ -n "${COMP_BLUETOOTH_SCAN:-}" ]; then
+        COMPREPLY=(${COMPREPLY[@]:-} $( compgen -W "$( hcitool scan |             awk '/^\t/{print $1}' )" -- "$cur" ));
+    fi
+}

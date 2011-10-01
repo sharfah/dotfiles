@@ -1,0 +1,112 @@
+_known_hosts_real () 
+{ 
+    local configfile flag prefix;
+    local cur curd awkcur user suffix aliases i host;
+    local -a kh khd config;
+    local OPTIND=1;
+    while getopts "acF:p:" flag "$@"; do
+        case $flag in 
+            a)
+                aliases='yes'
+            ;;
+            c)
+                suffix=':'
+            ;;
+            F)
+                configfile=$OPTARG
+            ;;
+            p)
+                prefix=$OPTARG
+            ;;
+        esac;
+    done;
+    [ $# -lt $OPTIND ] && echo "error: $FUNCNAME: missing mandatory argument CWORD";
+    cur=${!OPTIND};
+    let "OPTIND += 1";
+    [ $# -ge $OPTIND ] && echo "error: $FUNCNAME("$@"): unprocessed arguments:" $(while [ $# -ge $OPTIND ]; do printf '%s\n' ${!OPTIND}; shift; done);
+    [[ $cur == *@* ]] && user=${cur%@*}@ && cur=${cur#*@};
+    kh=();
+    if [ -n "$configfile" ]; then
+        [ -r "$configfile" ] && config=("${config[@]}" "$configfile");
+    else
+        for i in /etc/ssh/ssh_config "${HOME}/.ssh/config" "${HOME}/.ssh2/config";
+        do
+            [ -r $i ] && config=("${config[@]}" "$i");
+        done;
+    fi;
+    if [ ${#config[@]} -gt 0 ]; then
+        local OIFS=$IFS IFS='
+';
+        local -a tmpkh;
+        tmpkh=($( awk 'sub("^[ \t]*([Gg][Ll][Oo][Bb][Aa][Ll]|[Uu][Ss][Ee][Rr])[Kk][Nn][Oo][Ww][Nn][Hh][Oo][Ss][Tt][Ss][Ff][Ii][Ll][Ee][ \t]+", "") { print $0 }' "${config[@]}" | sort -u ));
+        for i in "${tmpkh[@]}";
+        do
+            i=${i//\"};
+            __expand_tilde_by_ref i;
+            [ -r "$i" ] && kh=("${kh[@]}" "$i");
+        done;
+        IFS=$OIFS;
+    fi;
+    if [ -z "$configfile" ]; then
+        for i in /etc/ssh/ssh_known_hosts /etc/ssh/ssh_known_hosts2 /etc/known_hosts /etc/known_hosts2 ~/.ssh/known_hosts ~/.ssh/known_hosts2;
+        do
+            [ -r $i ] && kh=("${kh[@]}" $i);
+        done;
+        for i in /etc/ssh2/knownhosts ~/.ssh2/hostkeys;
+        do
+            [ -d $i ] && khd=("${khd[@]}" $i/*pub);
+        done;
+    fi;
+    if [[ ${#kh[@]} -gt 0 || ${#khd[@]} -gt 0 ]]; then
+        awkcur=${cur//\//\\\/};
+        awkcur=${awkcur//\./\\\.};
+        curd=$awkcur;
+        if [[ "$awkcur" == [0-9]*[.:]* ]]; then
+            awkcur="^$awkcur[.:]*";
+        else
+            if [[ "$awkcur" == [0-9]* ]]; then
+                awkcur="^$awkcur.*[.:]";
+            else
+                if [ -z "$awkcur" ]; then
+                    awkcur="[a-z.:]";
+                else
+                    awkcur="^$awkcur";
+                fi;
+            fi;
+        fi;
+        if [ ${#kh[@]} -gt 0 ]; then
+            COMPREPLY=("${COMPREPLY[@]}" $( awk 'BEGIN {FS=","}
+            /^\s*[^|\#]/ {for (i=1; i<=2; ++i) { \
+            sub(" .*$", "", $i); \
+            sub("^\\[", "", $i); sub("\\](:[0-9]+)?$", "", $i); \
+            if ($i ~ /'"$awkcur"'/) {print $i} \
+            }}' "${kh[@]}" 2>/dev/null ));
+        fi;
+        if [ ${#khd[@]} -gt 0 ]; then
+            for i in "${khd[@]}";
+            do
+                if [[ "$i" == *key_22_$curd*.pub && -r "$i" ]]; then
+                    host=${i/#*key_22_/};
+                    host=${host/%.pub/};
+                    COMPREPLY=("${COMPREPLY[@]}" $host);
+                fi;
+            done;
+        fi;
+        for ((i=0; i < ${#COMPREPLY[@]}; i++ ))
+        do
+            COMPREPLY[i]=$prefix$user${COMPREPLY[i]}$suffix;
+        done;
+    fi;
+    if [[ ${#config[@]} -gt 0 && -n "$aliases" ]]; then
+        local hosts=$( sed -ne 's/^[ \t]*[Hh][Oo][Ss][Tt]\([Nn][Aa][Mm][Ee]\)\{0,1\}['"$'\t '"']\{1,\}\([^#*?]*\)\(#.*\)\{0,1\}$/\2/p' "${config[@]}" );
+        COMPREPLY=("${COMPREPLY[@]}" $( compgen  -P "$prefix$user"             -S "$suffix" -W "$hosts" -- "$cur" ));
+    fi;
+    if [[ -n ${COMP_KNOWN_HOSTS_WITH_AVAHI:-} ]] && type avahi-browse &>/dev/null; then
+        COMPREPLY=("${COMPREPLY[@]}" $(             compgen -P "$prefix$user" -S "$suffix" -W             "$( avahi-browse -cpr _workstation._tcp 2>/dev/null |                  awk -F';' '/^=/ { print $7 }' | sort -u )" -- "$cur" ));
+    fi;
+    if [ -n "${COMP_KNOWN_HOSTS_WITH_HOSTFILE-1}" ]; then
+        COMPREPLY=("${COMPREPLY[@]}" $( compgen -A hostname -P "$prefix$user" -S "$suffix" -- "$cur" ));
+    fi;
+    __ltrim_colon_completions "$prefix$user$cur";
+    return 0
+}

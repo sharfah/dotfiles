@@ -1,0 +1,6 @@
+_pm_action () 
+{ 
+    local cur;
+    _get_comp_words_by_ref cur;
+    COMPREPLY=($( compgen -W "--help $( _parse_help "$1" )" -- "$cur" ))
+}

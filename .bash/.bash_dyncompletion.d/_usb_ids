@@ -1,0 +1,4 @@
+_usb_ids () 
+{ 
+    COMPREPLY=(${COMPREPLY[@]:-} $( compgen -W         "$( PATH="$PATH:/sbin" lsusb | awk '{print $6}' )" -- "$cur" ))
+}

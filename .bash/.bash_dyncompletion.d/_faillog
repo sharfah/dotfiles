@@ -1,0 +1,22 @@
+_faillog () 
+{ 
+    local cur prev split=false;
+    COMPREPLY=();
+    _get_comp_words_by_ref cur prev;
+    _split_longopt && split=true;
+    case $prev in 
+        -h | --help | -l | --lock-time | -m | --maximum | -t | --time)
+            return 0
+        ;;
+        -u | --user)
+            COMPREPLY=($( compgen -u -- "$cur" ));
+            return 0
+        ;;
+    esac;
+    $split && return 0;
+    if [[ "$cur" == -* ]]; then
+        COMPREPLY=($( compgen -W '--all --help --lock-time \
+            --maximum --reset --time --user' -- "$cur" ));
+        return 0;
+    fi
+}

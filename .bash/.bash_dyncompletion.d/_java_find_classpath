@@ -1,0 +1,13 @@
+_java_find_classpath () 
+{ 
+    local i;
+    for ((i=1; i < COMP_CWORD; i++ ))
+    do
+        if [[ "${COMP_WORDS[i]}" == -@(cp|classpath) ]]; then
+            classpath=${COMP_WORDS[i+1]};
+            break;
+        fi;
+    done;
+    [ -z "$classpath" ] && classpath=$CLASSPATH;
+    [ -z "$classpath" ] && classpath=.
+}

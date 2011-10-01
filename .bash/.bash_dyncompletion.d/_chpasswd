@@ -1,0 +1,22 @@
+_chpasswd () 
+{ 
+    local cur prev split=false;
+    COMPREPLY=();
+    _get_comp_words_by_ref cur prev;
+    _split_longopt && split=true;
+    case $prev in 
+        -c | --crypt)
+            COMPREPLY=($( compgen -W 'DES MD5 NONE SHA256 SHA512'                 -- "$cur" ));
+            return 0
+        ;;
+        -s | --sha-rounds)
+            return 0
+        ;;
+    esac;
+    $split && return 0;
+    if [[ "$cur" == -* ]]; then
+        COMPREPLY=($( compgen -W '--crypt-method --encrypted \
+            --help --md5 --sha-rounds' -- "$cur" ));
+        return 0;
+    fi
+}

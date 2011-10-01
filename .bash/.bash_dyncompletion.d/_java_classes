@@ -1,0 +1,22 @@
+_java_classes () 
+{ 
+    local classpath i;
+    _java_find_classpath;
+    cur=${cur//.//};
+    for i in ${classpath//:/ };
+    do
+        if [[ "$i" == *.@(jar|zip) && -r $i ]]; then
+            if type zipinfo &>/dev/null; then
+                COMPREPLY=("${COMPREPLY[@]}" $( zipinfo -1                     "$i" "$cur*" 2>/dev/null |                     command grep '^[^$]*\.class$' ));
+            else
+                COMPREPLY=("${COMPREPLY[@]}" $( jar tf "$i"                     "$cur" | command grep '^[^$]*\.class$' ));
+            fi;
+        else
+            if [ -d $i ]; then
+                COMPREPLY=("${COMPREPLY[@]}" $( command ls $i/$cur*.class 2>/dev/null |                     sed -ne '/\$/d' -e "s|^$i//*||p" ));
+            fi;
+        fi;
+    done;
+    COMPREPLY=(${COMPREPLY[@]%.class});
+    COMPREPLY=(${COMPREPLY[@]//\//.})
+}

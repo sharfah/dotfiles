@@ -1,0 +1,4 @@
+_pids () 
+{ 
+    COMPREPLY=($( compgen -W '$( command ps axo pid= )' -- "$cur" ))
+}

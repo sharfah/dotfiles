@@ -1,0 +1,48 @@
+_man () 
+{ 
+    local cur i prev sect manpath manext mansect uname;
+    manext="@([0-9lnp]|[0-9][px]|man|3pm)?(.@([gx]z|bz2|lzma|Z))";
+    mansect="@([0-9lnp]|[0-9][px]|3pm)";
+    COMPREPLY=();
+    _get_comp_words_by_ref -n : cur prev;
+    if [[ "$prev" == -l ]]; then
+        _filedir $manext;
+        return 0;
+    fi;
+    _expand || return 0;
+    if [[ "$cur" == */* ]]; then
+        _filedir $manext;
+        return 0;
+    fi;
+    uname=$( uname -s );
+    if [[ $uname == @(Linux|GNU|GNU/*|FreeBSD|Cygwin|CYGWIN_*) ]]; then
+        manpath=$( manpath 2>/dev/null || command man --path );
+    else
+        manpath=$MANPATH;
+    fi;
+    if [ -z "$manpath" ]; then
+        COMPREPLY=($( compgen -c -- "$cur" ));
+        return 0;
+    fi;
+    [[ "$prev" == $mansect ]] && sect=$prev || sect='*';
+    manpath=$manpath:;
+    if [ -n "$cur" ]; then
+        manpath="${manpath//://*man$sect/$cur* } ${manpath//://*cat$sect/$cur* }";
+    else
+        manpath="${manpath//://*man$sect/ } ${manpath//://*cat$sect/ }";
+    fi;
+    COMPREPLY=($( eval command ls "$manpath" 2>/dev/null ));
+    COMPREPLY=(${COMPREPLY[@]##*/?(:)});
+    COMPREPLY=(${COMPREPLY[@]%.@([gx]z|bz2|lzma|Z)});
+    COMPREPLY=($( compgen -W '${COMPREPLY[@]%.*}' -- "${cur//\\\\/}" ));
+    if [[ "$prev" != $mansect ]]; then
+        local start=${#COMPREPLY[@]};
+        _filedir $manext;
+        for ((i=$start; i < ${#COMPREPLY[@]}; i++ ))
+        do
+            [[ ${COMPREPLY[i]} == */* ]] || COMPREPLY[i]=./${COMPREPLY[i]};
+        done;
+    fi;
+    __ltrim_colon_completions "$cur";
+    return 0
+}

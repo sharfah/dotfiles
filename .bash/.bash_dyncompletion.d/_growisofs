@@ -1,0 +1,29 @@
+_growisofs () 
+{ 
+    COMPREPLY=();
+    local cur prev;
+    _get_comp_words_by_ref cur prev;
+    case $prev in 
+        -version | -speed)
+            return 0
+        ;;
+        -Z | -M)
+            compopt -o nospace &>/dev/null;
+            _dvd_devices;
+            return 0
+        ;;
+        /?(r)dev/*)
+            if [[ $cur == =* ]]; then
+                cur="${cur#=}";
+                _filedir;
+                return 0;
+            fi
+        ;;
+    esac;
+    if [[ "$cur" == -* ]]; then
+        COMPREPLY=($( compgen -W '-dvd-compat -overburn -speed= -Z -M'             -- "$cur" ));
+        [[ ${COMPREPLY[@]} == *= ]] && compopt -o nospace &>/dev/null;
+        return 0;
+    fi;
+    _filedir
+}

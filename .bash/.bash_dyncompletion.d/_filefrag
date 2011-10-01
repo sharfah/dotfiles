@@ -1,0 +1,11 @@
+_filefrag () 
+{ 
+    COMPREPLY=();
+    local cur;
+    _get_comp_words_by_ref cur;
+    if [[ "$cur" == -* ]]; then
+        COMPREPLY=($( compgen -W '-B -b -s -v -x' -- "$cur" ));
+        return 0;
+    fi;
+    _filedir
+}

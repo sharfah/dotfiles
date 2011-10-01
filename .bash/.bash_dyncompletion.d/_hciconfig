@@ -1,0 +1,41 @@
+_hciconfig () 
+{ 
+    local cur;
+    COMPREPLY=();
+    _get_comp_words_by_ref cur;
+    _get_first_arg;
+    if [ -z $arg ]; then
+        if [[ "$cur" == -* ]]; then
+            COMPREPLY=($( compgen -W '--help --all' -- "$cur" ));
+        else
+            COMPREPLY=($( compgen -W 'up down reset rstat auth \
+                noauth encrypt noencrypt secmgr nosecmgr \
+                piscan noscan iscan pscan ptype name class \
+                voice iac inqmode inqdata inqtype inqparams \
+                pageparms pageto afhmode aclmtu scomtu putkey \
+                delkey commands features version revision lm'                 -- "$cur" ));
+        fi;
+    else
+        case $arg in 
+            putkey | delkey)
+                _count_args;
+                if [ $args -eq 2 ]; then
+                    _bluetooth_adresses;
+                fi
+            ;;
+            lm)
+                _count_args;
+                if [ $args -eq 2 ]; then
+                    COMPREPLY=($( compgen -W 'MASTER \
+                        SLAVE NONE ACCEPT' -- "$cur" ));
+                fi
+            ;;
+            ptype)
+                _count_args;
+                if [ $args -eq 2 ]; then
+                    _bluetooth_packet_types;
+                fi
+            ;;
+        esac;
+    fi
+}

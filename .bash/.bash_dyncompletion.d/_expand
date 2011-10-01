@@ -1,0 +1,13 @@
+_expand () 
+{ 
+    if [[ "$cur" == \~*/* ]]; then
+        eval cur=$cur;
+    else
+        if [[ "$cur" == \~* ]]; then
+            cur=${cur#\~};
+            COMPREPLY=($( compgen -P '~' -u "$cur" ));
+            [ ${#COMPREPLY[@]} -eq 1 ] && eval COMPREPLY[0]=${COMPREPLY[0]};
+            return ${#COMPREPLY[@]};
+        fi;
+    fi
+}

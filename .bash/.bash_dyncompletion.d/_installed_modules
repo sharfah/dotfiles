@@ -1,0 +1,4 @@
+_installed_modules () 
+{ 
+    COMPREPLY=($( compgen -W "$( PATH="$PATH:/sbin" lsmod |         awk '{if (NR != 1) print $1}' )" -- "$1" ))
+}

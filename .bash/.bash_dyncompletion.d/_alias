@@ -1,0 +1,14 @@
+_alias () 
+{ 
+    local cur;
+    COMPREPLY=();
+    _get_comp_words_by_ref cur;
+    case $COMP_LINE in 
+        *[^=])
+            COMPREPLY=($( compgen -A alias -- "$cur" ))
+        ;;
+        *=)
+            COMPREPLY=("$( alias ${cur%=} 2>/dev/null | sed                 -e 's|^alias '"$cur"'\(.*\)$|\1|' )")
+        ;;
+    esac
+}

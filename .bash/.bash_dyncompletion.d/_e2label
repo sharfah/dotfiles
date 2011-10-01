@@ -1,0 +1,10 @@
+_e2label () 
+{ 
+    COMPREPLY=();
+    local cur cword;
+    _get_comp_words_by_ref cur cword;
+    if [ $cword -eq 1 ]; then
+        cur=${cur:=/dev/};
+        _filedir;
+    fi
+}

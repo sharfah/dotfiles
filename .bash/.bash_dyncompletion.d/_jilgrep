@@ -1,0 +1,25 @@
+_jilgrep () 
+{ 
+    local cur=${COMP_WORDS[COMP_CWORD]};
+    local prev=${COMP_WORDS[COMP_CWORD-1]};
+    case "$prev" in 
+        -i)
+            COMPREPLY=($( compgen -W "$(cat $AUTOSYS_HOSTFILE)" -- $cur ));
+            return 0
+        ;;
+        -h)
+            _known_hosts
+        ;;
+        -o)
+            COMPREPLY=($( compgen -W "scenprod zscenqa" -- $cur ));
+            return 0
+        ;;
+        -s | -x)
+            COMPREPLY=($( compgen -W "RUNNING STARTING SUCCESS FAILURE INACTIVE TERMINATED" -- $cur ));
+            return 0
+        ;;
+    esac;
+    if [[ "$cur" == -* ]]; then
+        COMPREPLY=($( compgen -W "-i -h -c -o -e -nocase -m -p -npi -s -x -start -end" -- $cur ));
+    fi
+}

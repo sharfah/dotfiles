@@ -1,0 +1,23 @@
+_smbtar () 
+{ 
+    local cur prev;
+    COMPREPLY=();
+    _get_comp_words_by_ref cur prev;
+    case $prev in 
+        -r | -t)
+            _filedir tar;
+            return 0
+        ;;
+        -s)
+            _samba_hosts;
+            return 0
+        ;;
+        -l)
+            _samba_debuglevel;
+            return 0
+        ;;
+    esac;
+    if [[ "$cur" == -* ]]; then
+        COMPREPLY=($( compgen -W '-r -i -a -v -s -p -x -X -N -b -d -l -u -t'             -- "$cur" ));
+    fi
+}

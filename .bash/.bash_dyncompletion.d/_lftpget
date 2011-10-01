@@ -1,0 +1,9 @@
+_lftpget () 
+{ 
+    COMPREPLY=();
+    local cur;
+    _get_comp_words_by_ref cur;
+    if [[ "$cur" == -* ]]; then
+        COMPREPLY=($( compgen -W '-c -d -v' -- "$cur" ));
+    fi
+}

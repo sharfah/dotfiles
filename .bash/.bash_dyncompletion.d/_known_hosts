@@ -1,0 +1,8 @@
+_known_hosts () 
+{ 
+    local options;
+    COMPREPLY=();
+    [[ "$1" == -a || "$2" == -a ]] && options=-a;
+    [[ "$1" == -c || "$2" == -c ]] && options="$options -c";
+    _known_hosts_real $options "$(_get_cword :)"
+}

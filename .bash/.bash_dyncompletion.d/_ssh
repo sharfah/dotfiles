@@ -1,0 +1,70 @@
+_ssh () 
+{ 
+    local cur prev configfile;
+    local -a config;
+    COMPREPLY=();
+    _get_comp_words_by_ref -n : cur prev;
+    _ssh_suboption_check && return 0;
+    case $prev in 
+        -F | -i | -S)
+            _filedir;
+            return 0
+        ;;
+        -c)
+            _ssh_ciphers;
+            return 0
+        ;;
+        -m)
+            _ssh_macs;
+            return 0
+        ;;
+        -l)
+            COMPREPLY=($( compgen -u -- "$cur" ));
+            return 0
+        ;;
+        -o)
+            _ssh_options;
+            return 0
+        ;;
+        -w)
+            _available_interfaces;
+            return 0
+        ;;
+        -b)
+            _ssh_bindaddress;
+            return 0
+        ;;
+    esac;
+    if [[ "$cur" == -F* ]]; then
+        cur=${cur#-F};
+        _filedir;
+        COMPREPLY=("${COMPREPLY[@]/#/-F}");
+        cur=-F$cur;
+    else
+        if [[ "$cur" == -* ]]; then
+            COMPREPLY=($( compgen -W '-1 -2 -4 -6 -A -a -C -f -g -K -k -M \
+            -N -n -q -s -T -t -V -v -X -v -Y -y -b -b -c -D -e -F \
+            -i -L -l -m -O -o -p -R -S -w' -- "$cur" ));
+        else
+            set -- "${COMP_WORDS[@]}";
+            while [ $# -gt 0 ]; do
+                if [ "${1:0:2}" = -F ]; then
+                    if [ ${#1} -gt 2 ]; then
+                        configfile="$(dequote "${1:2}")";
+                    else
+                        shift;
+                        [ "$1" ] && configfile="$(dequote "$1")";
+                    fi;
+                    break;
+                fi;
+                shift;
+            done;
+            _known_hosts_real -a -F "$configfile" "$cur";
+            if [ $COMP_CWORD -ne 1 ]; then
+                _compopt_o_filenames;
+                COMPREPLY=("${COMPREPLY[@]}" $( compgen -c -- "$cur" ));
+            fi;
+        fi;
+    fi;
+    return 0
+}

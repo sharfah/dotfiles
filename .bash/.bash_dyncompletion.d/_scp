@@ -1,0 +1,68 @@
+_scp () 
+{ 
+    local configfile cur prev prefix;
+    COMPREPLY=();
+    _get_comp_words_by_ref -n : cur prev;
+    _ssh_suboption_check && { 
+        COMPREPLY=("${COMPREPLY[@]/%/ }");
+        return 0
+    };
+    case $prev in 
+        -l | -P)
+            return 0
+        ;;
+        -F | -i | -S)
+            _filedir;
+            type compopt &>/dev/null && compopt +o nospace;
+            return 0
+        ;;
+        -c)
+            _ssh_ciphers;
+            COMPREPLY=("${COMPREPLY[@]/%/ }");
+            return 0
+        ;;
+        -o)
+            _ssh_options;
+            return 0
+        ;;
+    esac;
+    _expand || return 0;
+    if [[ "$cur" == *:* ]]; then
+        _scp_remote_files;
+        return 0;
+    fi;
+    if [[ "$cur" == -F* ]]; then
+        cur=${cur#-F};
+        prefix=-F;
+    else
+        set -- "${COMP_WORDS[@]}";
+        while [ $# -gt 0 ]; do
+            if [ "${1:0:2}" = -F ]; then
+                if [ ${#1} -gt 2 ]; then
+                    configfile="$(dequote "${1:2}")";
+                else
+                    shift;
+                    [ "$1" ] && configfile="$(dequote "$1")";
+                fi;
+                break;
+            fi;
+            shift;
+        done;
+        case $cur in 
+            -*)
+                COMPREPLY=($( compgen -W '-1 -2 -4 -6 -B -C -c -F -i -l -o \
+                    -P -p -q -r -S -v' -- "$cur" ));
+                COMPREPLY=("${COMPREPLY[@]/%/ }");
+                return 0
+            ;;
+            */*)
+
+            ;;
+            *)
+                _known_hosts_real -c -a -F "$configfile" "$cur"
+            ;;
+        esac;
+    fi;
+    _scp_local_files "$prefix";
+    return 0
+}

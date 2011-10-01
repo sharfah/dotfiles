@@ -1,0 +1,4 @@
+_rl_enabled () 
+{ 
+    [[ "$( bind -v )" = *$1+([[:space:]])on* ]]
+}

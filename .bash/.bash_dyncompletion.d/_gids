@@ -1,0 +1,12 @@
+_gids () 
+{ 
+    if type getent &>/dev/null; then
+        COMPREPLY=($( compgen -W '$( getent group | cut -d: -f3 )'             -- "$cur" ));
+    else
+        if type perl &>/dev/null; then
+            COMPREPLY=($( compgen -W '$( perl -e '"'"'while (($gid) = (getgrent)[2]) { print $gid . "\n" }'"'"' )' -- "$cur" ));
+        else
+            COMPREPLY=($( compgen -W '$( cut -d: -f3 /etc/group )' -- "$cur" ));
+        fi;
+    fi
+}

@@ -1,0 +1,27 @@
+__get_cword_at_cursor_by_ref () 
+{ 
+    local cword words=();
+    __reassemble_comp_words_by_ref "$1" words cword;
+    local i cur2;
+    local cur="$COMP_LINE";
+    local index="$COMP_POINT";
+    for ((i = 0; i <= cword; ++i ))
+    do
+        while [[ "${#cur}" -ge ${#words[i]} && "${cur:0:${#words[i]}}" != "${words[i]}" ]]; do
+            cur="${cur:1}";
+            ((index--));
+        done;
+        if [[ "$i" -lt "$cword" ]]; then
+            local old_size="${#cur}";
+            cur="${cur#${words[i]}}";
+            local new_size="${#cur}";
+            index=$(( index - old_size + new_size ));
+        fi;
+    done;
+    if [[ "${words[cword]:0:${#cur}}" != "$cur" ]]; then
+        cur2=${words[cword]};
+    else
+        cur2=${cur:0:$index};
+    fi;
+    local "$2" "$3" "$4" && _upvars -a${#words[@]} $2 "${words[@]}" -v $3 "$cword" -v $4 "$cur2"
+}

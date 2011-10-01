@@ -1,0 +1,4 @@
+_perlfunctions () 
+{ 
+    COMPREPLY=($( compgen -P "$prefix" -W "$( ${BASH_SOURCE[0]%/*}/helpers/perl functions $cur )" -- "$cur" ))
+}

@@ -1,0 +1,99 @@
+_java () 
+{ 
+    local cur prev words cword i;
+    COMPREPLY=();
+    _get_comp_words_by_ref -n : cur prev words cword;
+    for ((i=1; i < $cword; i++))
+    do
+        case ${words[$i]} in 
+            -cp | -classpath)
+                ((i++))
+            ;;
+            -*)
+
+            ;;
+            *)
+                _filedir;
+                return 0
+            ;;
+        esac;
+    done;
+    case $cur in 
+        -verbose:*)
+            COMPREPLY=($( compgen -W 'class gc jni' -- "${cur#*:}" ));
+            return 0
+        ;;
+        -javaagent:*)
+            cur=${cur#*:};
+            _filedir '@(jar|zip)';
+            return 0
+        ;;
+        -agentpath:*)
+            cur=${cur#*:};
+            _filedir so;
+            return 0
+        ;;
+        -splash:*)
+            cur=${cur#*:};
+            _filedir '@(gif|jp?(e)g|png)';
+            return 0
+        ;;
+        -Xbootclasspath*:*)
+            _java_path;
+            return 0
+        ;;
+        -Xcheck:*)
+            COMPREPLY=($( compgen -W 'jni' -- "${cur#*:}" ));
+            return 0
+        ;;
+        -Xgc:*)
+            COMPREPLY=($( compgen -W 'singlecon gencon singlepar genpar'                 -- "${cur#*:}" ));
+            return 0
+        ;;
+        -Xgcprio:*)
+            COMPREPLY=($( compgen -W 'throughput pausetime deterministic'                 -- "${cur#*:}" ));
+            return 0
+        ;;
+        -Xloggc:* | -Xverboselog:*)
+            cur=${cur#*:};
+            _filedir;
+            return 0
+        ;;
+        -Xshare:*)
+            COMPREPLY=($( compgen -W 'auto off on' -- "${cur#*:}" ));
+            return 0
+        ;;
+        -Xverbose:*)
+            COMPREPLY=($( compgen -W 'memory load jni cpuinfo codegen opt
+                gcpause gcreport' -- "${cur#*:}" ));
+            return 0
+        ;;
+        -Xverify:*)
+            COMPREPLY=($( compgen -W 'all none remote' -- "${cur#*:}" ));
+            return 0
+        ;;
+        -D* | -*:*)
+            return 0
+        ;;
+    esac;
+    case $prev in 
+        -cp | -classpath)
+            _java_path;
+            return 0
+        ;;
+    esac;
+    if [[ "$cur" == -* ]]; then
+        COMPREPLY=($( compgen -W '-client -server -agentlib: -agentpath:
+            -classpath -D -d32 -d64 -enableassertions -disableassertions
+            -enablesystemassertions -disablesystemassertions -jar -javaagent:
+            -verbose -verbose -version -showversion -help -X' -- "$cur" ));
+    else
+        if [[ "$prev" == -jar ]]; then
+            _filedir jar;
+        else
+            _java_classes;
+        fi;
+    fi;
+    [[ ${#COMPREPLY[@]} -eq 1 && ${COMPREPLY[0]} == -*[:=] ]] && type compopt &>/dev/null && compopt -o nospace;
+    __ltrim_colon_completions "$cur"
+}

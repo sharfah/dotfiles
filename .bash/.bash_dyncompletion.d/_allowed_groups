@@ -1,0 +1,12 @@
+_allowed_groups () 
+{ 
+    if _complete_as_root; then
+        local IFS='
+';
+        COMPREPLY=($( compgen -g -- "$1" ));
+    else
+        local IFS='
+ ';
+        COMPREPLY=($( compgen -W             "$( id -Gn 2>/dev/null || groups 2>/dev/null )" -- "$1" ));
+    fi
+}

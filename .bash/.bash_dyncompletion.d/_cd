@@ -1,0 +1,30 @@
+_cd () 
+{ 
+    local cur IFS='
+' i j k;
+    _get_comp_words_by_ref cur;
+    first_char=${cur:0:1};
+    if [[ "$first_char" == "-" ]]; then
+        COMPREPLY=($(dirs -v | sed 's/^ */-/'));
+        return 0;
+    fi;
+    if [[ "$cur" == ?(\\)\$* ]]; then
+        COMPREPLY=($( compgen -v -P '$' -- "${cur#?(\\)$}" ));
+        return 0;
+    fi;
+    _compopt_o_filenames;
+    if [[ "$cur" == ?(.)?(.)/* ]]; then
+        _filedir -d;
+        return 0;
+    fi;
+    local -r mark_dirs=$(_rl_enabled mark-directories && echo y);
+    local -r mark_symdirs=$(_rl_enabled mark-symlinked-directories && echo y);
+    _filedir -d;
+    if [[ ${#COMPREPLY[@]} -eq 1 ]]; then
+        i=${COMPREPLY[0]};
+        if [[ "$i" == "$cur" && $i != "*/" ]]; then
+            COMPREPLY[0]="${i}/";
+        fi;
+    fi;
+    return 0
+}

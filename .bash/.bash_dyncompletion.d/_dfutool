@@ -1,0 +1,26 @@
+_dfutool () 
+{ 
+    local cur prev;
+    COMPREPLY=();
+    _get_comp_words_by_ref cur prev;
+    case $prev in 
+        -d | --device)
+            _bluetooth_devices;
+            return 0
+        ;;
+    esac;
+    if [[ "$cur" == -* ]]; then
+        COMPREPLY=($( compgen -W '--help --device' -- "$cur" ));
+    else
+        _count_args;
+        case $args in 
+            1)
+                COMPREPLY=($( compgen -W 'verify modify \
+                    upgrade archive' -- "$cur" ))
+            ;;
+            2)
+                _filedir
+            ;;
+        esac;
+    fi
+}

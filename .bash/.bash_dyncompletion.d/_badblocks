@@ -1,0 +1,21 @@
+_badblocks () 
+{ 
+    COMPREPLY=();
+    local cur prev;
+    _get_comp_words_by_ref cur prev;
+    case $prev in 
+        -b | -c | -e | -d | -p | -t)
+            return 0
+        ;;
+        -i | -o)
+            _filedir;
+            return 0
+        ;;
+    esac;
+    if [[ "$cur" == -* ]]; then
+        COMPREPLY=($( compgen -W '-b -c -e -d -f -i -n -o -p -s -t -v'             -- "$cur" ));
+        return 0;
+    fi;
+    cur=${cur:=/dev/};
+    _filedir
+}

@@ -1,0 +1,1716 @@
+# .bash_dyncompletion - load-by-need bash completions
+# actual completion functions are stored in /home/sharfah/.bash/.bash_dyncompletion.d
+# this file and directory are generated from /home/sharfah/.bash/.bash_completion
+shopt -s extglob progcomp
+declare -r BASH_COMPLETION="/home/sharfah/.bash/.bash_completion"
+__expand_tilde_by_ref () 
+{ 
+    . '/home/sharfah/.bash/.bash_dyncompletion.d/__expand_tilde_by_ref';
+    __expand_tilde_by_ref "$@"
+}
+__get_cword_at_cursor_by_ref () 
+{ 
+    . '/home/sharfah/.bash/.bash_dyncompletion.d/__get_cword_at_cursor_by_ref';
+    __get_cword_at_cursor_by_ref "$@"
+}
+__linux_fstab_unescape () 
+{ 
+    . '/home/sharfah/.bash/.bash_dyncompletion.d/__linux_fstab_unescape';
+    __linux_fstab_unescape "$@"
+}
+__ltrim_colon_completions () 
+{ 
+    . '/home/sharfah/.bash/.bash_dyncompletion.d/__ltrim_colon_completions';
+    __ltrim_colon_completions "$@"
+}
+__reassemble_comp_words_by_ref () 
+{ 
+    . '/home/sharfah/.bash/.bash_dyncompletion.d/__reassemble_comp_words_by_ref';
+    __reassemble_comp_words_by_ref "$@"
+}
+_alias () 
+{ 
+    . '/home/sharfah/.bash/.bash_dyncompletion.d/_alias';
+    _alias "$@"
+}
+_allowed_groups () 
+{ 
+    . '/home/sharfah/.bash/.bash_dyncompletion.d/_allowed_groups';
+    _allowed_groups "$@"
+}
+_allowed_users () 
+{ 
+    . '/home/sharfah/.bash/.bash_dyncompletion.d/_allowed_users';
+    _allowed_users "$@"
+}
+_apt_cache () 
+{ 
+    . '/home/sharfah/.bash/.bash_dyncompletion.d/_apt_cache';
+    _apt_cache "$@"
+}
+_apt_get () 
+{ 
+    . '/home/sharfah/.bash/.bash_dyncompletion.d/_apt_get';
+    _apt_get "$@"
+}
+_aptitude () 
+{ 
+    . '/home/sharfah/.bash/.bash_dyncompletion.d/_aptitude';
+    _aptitude "$@"
+}
+_aspell () 
+{ 
+    . '/home/sharfah/.bash/.bash_dyncompletion.d/_aspell';
+    _aspell "$@"
+}
+_aspell_dictionary () 
+{ 
+    . '/home/sharfah/.bash/.bash_dyncompletion.d/_aspell_dictionary';
+    _aspell_dictionary "$@"
+}
+_autorep () 
+{ 
+    . '/home/sharfah/.bash/.bash_dyncompletion.d/_autorep';
+    _autorep "$@"
+}
+_autosysjobs () 
+{ 
+    . '/home/sharfah/.bash/.bash_dyncompletion.d/_autosysjobs';
+    _autosysjobs "$@"
+}
+_available_interfaces () 
+{ 
+    . '/home/sharfah/.bash/.bash_dyncompletion.d/_available_interfaces';
+    _available_interfaces "$@"
+}
+_avctrl () 
+{ 
+    . '/home/sharfah/.bash/.bash_dyncompletion.d/_avctrl';
+    _avctrl "$@"
+}
+_badblocks () 
+{ 
+    . '/home/sharfah/.bash/.bash_dyncompletion.d/_badblocks';
+    _badblocks "$@"
+}
+_bluetooth_adresses () 
+{ 
+    . '/home/sharfah/.bash/.bash_dyncompletion.d/_bluetooth_adresses';
+    _bluetooth_adresses "$@"
+}
+_bluetooth_devices () 
+{ 
+    . '/home/sharfah/.bash/.bash_dyncompletion.d/_bluetooth_devices';
+    _bluetooth_devices "$@"
+}
+_bluetooth_packet_types () 
+{ 
+    . '/home/sharfah/.bash/.bash_dyncompletion.d/_bluetooth_packet_types';
+    _bluetooth_packet_types "$@"
+}
+_bluetooth_services () 
+{ 
+    . '/home/sharfah/.bash/.bash_dyncompletion.d/_bluetooth_services';
+    _bluetooth_services "$@"
+}
+_bzip2 () 
+{ 
+    . '/home/sharfah/.bash/.bash_dyncompletion.d/_bzip2';
+    _bzip2 "$@"
+}
+_cancel () 
+{ 
+    . '/home/sharfah/.bash/.bash_dyncompletion.d/_cancel';
+    _cancel "$@"
+}
+_cardctl () 
+{ 
+    . '/home/sharfah/.bash/.bash_dyncompletion.d/_cardctl';
+    _cardctl "$@"
+}
+_cd () 
+{ 
+    . '/home/sharfah/.bash/.bash_dyncompletion.d/_cd';
+    _cd "$@"
+}
+_cd_devices () 
+{ 
+    . '/home/sharfah/.bash/.bash_dyncompletion.d/_cd_devices';
+    _cd_devices "$@"
+}
+_cdrecord () 
+{ 
+    . '/home/sharfah/.bash/.bash_dyncompletion.d/_cdrecord';
+    _cdrecord "$@"
+}
+_chage () 
+{ 
+    . '/home/sharfah/.bash/.bash_dyncompletion.d/_chage';
+    _chage "$@"
+}
+_chgrp () 
+{ 
+    . '/home/sharfah/.bash/.bash_dyncompletion.d/_chgrp';
+    _chgrp "$@"
+}
+_chown () 
+{ 
+    . '/home/sharfah/.bash/.bash_dyncompletion.d/_chown';
+    _chown "$@"
+}
+_chpasswd () 
+{ 
+    . '/home/sharfah/.bash/.bash_dyncompletion.d/_chpasswd';
+    _chpasswd "$@"
+}
+_chsh () 
+{ 
+    . '/home/sharfah/.bash/.bash_dyncompletion.d/_chsh';
+    _chsh "$@"
+}
+_ciptool () 
+{ 
+    . '/home/sharfah/.bash/.bash_dyncompletion.d/_ciptool';
+    _ciptool "$@"
+}
+_command () 
+{ 
+    . '/home/sharfah/.bash/.bash_dyncompletion.d/_command';
+    _command "$@"
+}
+_command_offset () 
+{ 
+    . '/home/sharfah/.bash/.bash_dyncompletion.d/_command_offset';
+    _command_offset "$@"
+}
+_comp_dpkg_hold_packages () 
+{ 
+    . '/home/sharfah/.bash/.bash_dyncompletion.d/_comp_dpkg_hold_packages';
+    _comp_dpkg_hold_packages "$@"
+}
+_comp_dpkg_installed_packages () 
+{ 
+    . '/home/sharfah/.bash/.bash_dyncompletion.d/_comp_dpkg_installed_packages';
+    _comp_dpkg_installed_packages "$@"
+}
+_complete () 
+{ 
+    . '/home/sharfah/.bash/.bash_dyncompletion.d/_complete';
+    _complete "$@"
+}
+_complete_as_root () 
+{ 
+    . '/home/sharfah/.bash/.bash_dyncompletion.d/_complete_as_root';
+    _complete_as_root "$@"
+}
+_compopt_o_filenames () 
+{ 
+    . '/home/sharfah/.bash/.bash_dyncompletion.d/_compopt_o_filenames';
+    _compopt_o_filenames "$@"
+}
+_configure () 
+{ 
+    . '/home/sharfah/.bash/.bash_dyncompletion.d/_configure';
+    _configure "$@"
+}
+_configured_interfaces () 
+{ 
+    . '/home/sharfah/.bash/.bash_dyncompletion.d/_configured_interfaces';
+    _configured_interfaces "$@"
+}
+_count_args () 
+{ 
+    . '/home/sharfah/.bash/.bash_dyncompletion.d/_count_args';
+    _count_args "$@"
+}
+_cpio () 
+{ 
+    . '/home/sharfah/.bash/.bash_dyncompletion.d/_cpio';
+    _cpio "$@"
+}
+_cpio_format () 
+{ 
+    . '/home/sharfah/.bash/.bash_dyncompletion.d/_cpio_format';
+    _cpio_format "$@"
+}
+_crontab () 
+{ 
+    . '/home/sharfah/.bash/.bash_dyncompletion.d/_crontab';
+    _crontab "$@"
+}
+_cryptsetup_device () 
+{ 
+    . '/home/sharfah/.bash/.bash_dyncompletion.d/_cryptsetup_device';
+    _cryptsetup_device "$@"
+}
+_cryptsetup_name () 
+{ 
+    . '/home/sharfah/.bash/.bash_dyncompletion.d/_cryptsetup_name';
+    _cryptsetup_name "$@"
+}
+_dd () 
+{ 
+    . '/home/sharfah/.bash/.bash_dyncompletion.d/_dd';
+    _dd "$@"
+}
+_dfutool () 
+{ 
+    . '/home/sharfah/.bash/.bash_dyncompletion.d/_dfutool';
+    _dfutool "$@"
+}
+_dhclient () 
+{ 
+    . '/home/sharfah/.bash/.bash_dyncompletion.d/_dhclient';
+    _dhclient "$@"
+}
+_dpkg () 
+{ 
+    . '/home/sharfah/.bash/.bash_dyncompletion.d/_dpkg';
+    _dpkg "$@"
+}
+_dpkg_reconfigure () 
+{ 
+    . '/home/sharfah/.bash/.bash_dyncompletion.d/_dpkg_reconfigure';
+    _dpkg_reconfigure "$@"
+}
+_dpkg_source () 
+{ 
+    . '/home/sharfah/.bash/.bash_dyncompletion.d/_dpkg_source';
+    _dpkg_source "$@"
+}
+_dumpe2fs () 
+{ 
+    . '/home/sharfah/.bash/.bash_dyncompletion.d/_dumpe2fs';
+    _dumpe2fs "$@"
+}
+_dvd_devices () 
+{ 
+    . '/home/sharfah/.bash/.bash_dyncompletion.d/_dvd_devices';
+    _dvd_devices "$@"
+}
+_e2label () 
+{ 
+    . '/home/sharfah/.bash/.bash_dyncompletion.d/_e2label';
+    _e2label "$@"
+}
+_expand () 
+{ 
+    . '/home/sharfah/.bash/.bash_dyncompletion.d/_expand';
+    _expand "$@"
+}
+_export () 
+{ 
+    . '/home/sharfah/.bash/.bash_dyncompletion.d/_export';
+    _export "$@"
+}
+_faillog () 
+{ 
+    . '/home/sharfah/.bash/.bash_dyncompletion.d/_faillog';
+    _faillog "$@"
+}
+_filedir () 
+{ 
+    . '/home/sharfah/.bash/.bash_dyncompletion.d/_filedir';
+    _filedir "$@"
+}
+_filedir_xspec () 
+{ 
+    . '/home/sharfah/.bash/.bash_dyncompletion.d/_filedir_xspec';
+    _filedir_xspec "$@"
+}
+_filefrag () 
+{ 
+    . '/home/sharfah/.bash/.bash_dyncompletion.d/_filefrag';
+    _filefrag "$@"
+}
+_find () 
+{ 
+    . '/home/sharfah/.bash/.bash_dyncompletion.d/_find';
+    _find "$@"
+}
+_fs () 
+{ 
+    . '/home/sharfah/.bash/.bash_dyncompletion.d/_fs';
+    _fs "$@"
+}
+_fsql () 
+{ 
+    . '/home/sharfah/.bash/.bash_dyncompletion.d/_fsql';
+    _fsql "$@"
+}
+_fstypes () 
+{ 
+    . '/home/sharfah/.bash/.bash_dyncompletion.d/_fstypes';
+    _fstypes "$@"
+}
+_function () 
+{ 
+    . '/home/sharfah/.bash/.bash_dyncompletion.d/_function';
+    _function "$@"
+}
+_fusermount () 
+{ 
+    . '/home/sharfah/.bash/.bash_dyncompletion.d/_fusermount';
+    _fusermount "$@"
+}
+_gcc () 
+{ 
+    . '/home/sharfah/.bash/.bash_dyncompletion.d/_gcc';
+    _gcc "$@"
+}
+_gdb () 
+{ 
+    . '/home/sharfah/.bash/.bash_dyncompletion.d/_gdb';
+    _gdb "$@"
+}
+_get_comp_words_by_ref () 
+{ 
+    . '/home/sharfah/.bash/.bash_dyncompletion.d/_get_comp_words_by_ref';
+    _get_comp_words_by_ref "$@"
+}
+_get_cword () 
+{ 
+    . '/home/sharfah/.bash/.bash_dyncompletion.d/_get_cword';
+    _get_cword "$@"
+}
+_get_first_arg () 
+{ 
+    . '/home/sharfah/.bash/.bash_dyncompletion.d/_get_first_arg';
+    _get_first_arg "$@"
+}
+_get_pword () 
+{ 
+    . '/home/sharfah/.bash/.bash_dyncompletion.d/_get_pword';
+    _get_pword "$@"
+}
+_getent () 
+{ 
+    . '/home/sharfah/.bash/.bash_dyncompletion.d/_getent';
+    _getent "$@"
+}
+_gids () 
+{ 
+    . '/home/sharfah/.bash/.bash_dyncompletion.d/_gids';
+    _gids "$@"
+}
+_gpasswd () 
+{ 
+    . '/home/sharfah/.bash/.bash_dyncompletion.d/_gpasswd';
+    _gpasswd "$@"
+}
+_gpg () 
+{ 
+    . '/home/sharfah/.bash/.bash_dyncompletion.d/_gpg';
+    _gpg "$@"
+}
+_groupadd () 
+{ 
+    . '/home/sharfah/.bash/.bash_dyncompletion.d/_groupadd';
+    _groupadd "$@"
+}
+_groupmod () 
+{ 
+    . '/home/sharfah/.bash/.bash_dyncompletion.d/_groupmod';
+    _groupmod "$@"
+}
+_growisofs () 
+{ 
+    . '/home/sharfah/.bash/.bash_dyncompletion.d/_growisofs';
+    _growisofs "$@"
+}
+_grpck () 
+{ 
+    . '/home/sharfah/.bash/.bash_dyncompletion.d/_grpck';
+    _grpck "$@"
+}
+_gzip () 
+{ 
+    . '/home/sharfah/.bash/.bash_dyncompletion.d/_gzip';
+    _gzip "$@"
+}
+_hciattach () 
+{ 
+    . '/home/sharfah/.bash/.bash_dyncompletion.d/_hciattach';
+    _hciattach "$@"
+}
+_hciconfig () 
+{ 
+    . '/home/sharfah/.bash/.bash_dyncompletion.d/_hciconfig';
+    _hciconfig "$@"
+}
+_hcitool () 
+{ 
+    . '/home/sharfah/.bash/.bash_dyncompletion.d/_hcitool';
+    _hcitool "$@"
+}
+_hid2hci () 
+{ 
+    . '/home/sharfah/.bash/.bash_dyncompletion.d/_hid2hci';
+    _hid2hci "$@"
+}
+_iconv () 
+{ 
+    . '/home/sharfah/.bash/.bash_dyncompletion.d/_iconv';
+    _iconv "$@"
+}
+_id () 
+{ 
+    . '/home/sharfah/.bash/.bash_dyncompletion.d/_id';
+    _id "$@"
+}
+_ifupdown () 
+{ 
+    . '/home/sharfah/.bash/.bash_dyncompletion.d/_ifupdown';
+    _ifupdown "$@"
+}
+_insmod () 
+{ 
+    . '/home/sharfah/.bash/.bash_dyncompletion.d/_insmod';
+    _insmod "$@"
+}
+_installed_alternatives () 
+{ 
+    . '/home/sharfah/.bash/.bash_dyncompletion.d/_installed_alternatives';
+    _installed_alternatives "$@"
+}
+_installed_modules () 
+{ 
+    . '/home/sharfah/.bash/.bash_dyncompletion.d/_installed_modules';
+    _installed_modules "$@"
+}
+_invoke_rc_d () 
+{ 
+    . '/home/sharfah/.bash/.bash_dyncompletion.d/_invoke_rc_d';
+    _invoke_rc_d "$@"
+}
+_ip () 
+{ 
+    . '/home/sharfah/.bash/.bash_dyncompletion.d/_ip';
+    _ip "$@"
+}
+_isql () 
+{ 
+    . '/home/sharfah/.bash/.bash_dyncompletion.d/_isql';
+    _isql "$@"
+}
+_iwconfig () 
+{ 
+    . '/home/sharfah/.bash/.bash_dyncompletion.d/_iwconfig';
+    _iwconfig "$@"
+}
+_iwlist () 
+{ 
+    . '/home/sharfah/.bash/.bash_dyncompletion.d/_iwlist';
+    _iwlist "$@"
+}
+_iwpriv () 
+{ 
+    . '/home/sharfah/.bash/.bash_dyncompletion.d/_iwpriv';
+    _iwpriv "$@"
+}
+_iwspy () 
+{ 
+    . '/home/sharfah/.bash/.bash_dyncompletion.d/_iwspy';
+    _iwspy "$@"
+}
+_java () 
+{ 
+    . '/home/sharfah/.bash/.bash_dyncompletion.d/_java';
+    _java "$@"
+}
+_java_classes () 
+{ 
+    . '/home/sharfah/.bash/.bash_dyncompletion.d/_java_classes';
+    _java_classes "$@"
+}
+_java_find_classpath () 
+{ 
+    . '/home/sharfah/.bash/.bash_dyncompletion.d/_java_find_classpath';
+    _java_find_classpath "$@"
+}
+_java_find_sourcepath () 
+{ 
+    . '/home/sharfah/.bash/.bash_dyncompletion.d/_java_find_sourcepath';
+    _java_find_sourcepath "$@"
+}
+_java_packages () 
+{ 
+    . '/home/sharfah/.bash/.bash_dyncompletion.d/_java_packages';
+    _java_packages "$@"
+}
+_java_path () 
+{ 
+    . '/home/sharfah/.bash/.bash_dyncompletion.d/_java_path';
+    _java_path "$@"
+}
+_javaws () 
+{ 
+    . '/home/sharfah/.bash/.bash_dyncompletion.d/_javaws';
+    _javaws "$@"
+}
+_jilgrep () 
+{ 
+    . '/home/sharfah/.bash/.bash_dyncompletion.d/_jilgrep';
+    _jilgrep "$@"
+}
+_jobrunhist () 
+{ 
+    . '/home/sharfah/.bash/.bash_dyncompletion.d/_jobrunhist';
+    _jobrunhist "$@"
+}
+_kernel_versions () 
+{ 
+    . '/home/sharfah/.bash/.bash_dyncompletion.d/_kernel_versions';
+    _kernel_versions "$@"
+}
+_kill () 
+{ 
+    . '/home/sharfah/.bash/.bash_dyncompletion.d/_kill';
+    _kill "$@"
+}
+_killall () 
+{ 
+    . '/home/sharfah/.bash/.bash_dyncompletion.d/_killall';
+    _killall "$@"
+}
+_known_hosts () 
+{ 
+    . '/home/sharfah/.bash/.bash_dyncompletion.d/_known_hosts';
+    _known_hosts "$@"
+}
+_known_hosts_real () 
+{ 
+    . '/home/sharfah/.bash/.bash_dyncompletion.d/_known_hosts_real';
+    _known_hosts_real "$@"
+}
+_l2ping () 
+{ 
+    . '/home/sharfah/.bash/.bash_dyncompletion.d/_l2ping';
+    _l2ping "$@"
+}
+_lastlog () 
+{ 
+    . '/home/sharfah/.bash/.bash_dyncompletion.d/_lastlog';
+    _lastlog "$@"
+}
+_lftp () 
+{ 
+    . '/home/sharfah/.bash/.bash_dyncompletion.d/_lftp';
+    _lftp "$@"
+}
+_lftpget () 
+{ 
+    . '/home/sharfah/.bash/.bash_dyncompletion.d/_lftpget';
+    _lftpget "$@"
+}
+_linux_fstab () 
+{ 
+    . '/home/sharfah/.bash/.bash_dyncompletion.d/_linux_fstab';
+    _linux_fstab "$@"
+}
+_longopt () 
+{ 
+    . '/home/sharfah/.bash/.bash_dyncompletion.d/_longopt';
+    _longopt "$@"
+}
+_look () 
+{ 
+    . '/home/sharfah/.bash/.bash_dyncompletion.d/_look';
+    _look "$@"
+}
+_lsof () 
+{ 
+    . '/home/sharfah/.bash/.bash_dyncompletion.d/_lsof';
+    _lsof "$@"
+}
+_lzma () 
+{ 
+    . '/home/sharfah/.bash/.bash_dyncompletion.d/_lzma';
+    _lzma "$@"
+}
+_mac_addresses () 
+{ 
+    . '/home/sharfah/.bash/.bash_dyncompletion.d/_mac_addresses';
+    _mac_addresses "$@"
+}
+_make () 
+{ 
+    . '/home/sharfah/.bash/.bash_dyncompletion.d/_make';
+    _make "$@"
+}
+_man () 
+{ 
+    . '/home/sharfah/.bash/.bash_dyncompletion.d/_man';
+    _man "$@"
+}
+_mii_diag () 
+{ 
+    . '/home/sharfah/.bash/.bash_dyncompletion.d/_mii_diag';
+    _mii_diag "$@"
+}
+_mii_tool () 
+{ 
+    . '/home/sharfah/.bash/.bash_dyncompletion.d/_mii_tool';
+    _mii_tool "$@"
+}
+_mkisofs () 
+{ 
+    . '/home/sharfah/.bash/.bash_dyncompletion.d/_mkisofs';
+    _mkisofs "$@"
+}
+_mktemp () 
+{ 
+    . '/home/sharfah/.bash/.bash_dyncompletion.d/_mktemp';
+    _mktemp "$@"
+}
+_modules () 
+{ 
+    . '/home/sharfah/.bash/.bash_dyncompletion.d/_modules';
+    _modules "$@"
+}
+_mount () 
+{ 
+    . '/home/sharfah/.bash/.bash_dyncompletion.d/_mount';
+    _mount "$@"
+}
+_newgrp () 
+{ 
+    . '/home/sharfah/.bash/.bash_dyncompletion.d/_newgrp';
+    _newgrp "$@"
+}
+_newusers () 
+{ 
+    . '/home/sharfah/.bash/.bash_dyncompletion.d/_newusers';
+    _newusers "$@"
+}
+_nslookup () 
+{ 
+    . '/home/sharfah/.bash/.bash_dyncompletion.d/_nslookup';
+    _nslookup "$@"
+}
+_ntpdate () 
+{ 
+    . '/home/sharfah/.bash/.bash_dyncompletion.d/_ntpdate';
+    _ntpdate "$@"
+}
+_openssl () 
+{ 
+    . '/home/sharfah/.bash/.bash_dyncompletion.d/_openssl';
+    _openssl "$@"
+}
+_openssl_sections () 
+{ 
+    . '/home/sharfah/.bash/.bash_dyncompletion.d/_openssl_sections';
+    _openssl_sections "$@"
+}
+_pack200 () 
+{ 
+    . '/home/sharfah/.bash/.bash_dyncompletion.d/_pack200';
+    _pack200 "$@"
+}
+_parse_help () 
+{ 
+    . '/home/sharfah/.bash/.bash_dyncompletion.d/_parse_help';
+    _parse_help "$@"
+}
+_passwd () 
+{ 
+    . '/home/sharfah/.bash/.bash_dyncompletion.d/_passwd';
+    _passwd "$@"
+}
+_pci_ids () 
+{ 
+    . '/home/sharfah/.bash/.bash_dyncompletion.d/_pci_ids';
+    _pci_ids "$@"
+}
+_perl () 
+{ 
+    . '/home/sharfah/.bash/.bash_dyncompletion.d/_perl';
+    _perl "$@"
+}
+_perldoc () 
+{ 
+    . '/home/sharfah/.bash/.bash_dyncompletion.d/_perldoc';
+    _perldoc "$@"
+}
+_perlfunctions () 
+{ 
+    . '/home/sharfah/.bash/.bash_dyncompletion.d/_perlfunctions';
+    _perlfunctions "$@"
+}
+_perlmodules () 
+{ 
+    . '/home/sharfah/.bash/.bash_dyncompletion.d/_perlmodules';
+    _perlmodules "$@"
+}
+_pgids () 
+{ 
+    . '/home/sharfah/.bash/.bash_dyncompletion.d/_pgids';
+    _pgids "$@"
+}
+_pgrep () 
+{ 
+    . '/home/sharfah/.bash/.bash_dyncompletion.d/_pgrep';
+    _pgrep "$@"
+}
+_pids () 
+{ 
+    . '/home/sharfah/.bash/.bash_dyncompletion.d/_pids';
+    _pids "$@"
+}
+_pkg_config () 
+{ 
+    . '/home/sharfah/.bash/.bash_dyncompletion.d/_pkg_config';
+    _pkg_config "$@"
+}
+_pm_action () 
+{ 
+    . '/home/sharfah/.bash/.bash_dyncompletion.d/_pm_action';
+    _pm_action "$@"
+}
+_pm_is_supported () 
+{ 
+    . '/home/sharfah/.bash/.bash_dyncompletion.d/_pm_is_supported';
+    _pm_is_supported "$@"
+}
+_pm_powersave () 
+{ 
+    . '/home/sharfah/.bash/.bash_dyncompletion.d/_pm_powersave';
+    _pm_powersave "$@"
+}
+_pnames () 
+{ 
+    . '/home/sharfah/.bash/.bash_dyncompletion.d/_pnames';
+    _pnames "$@"
+}
+_pwck () 
+{ 
+    . '/home/sharfah/.bash/.bash_dyncompletion.d/_pwck';
+    _pwck "$@"
+}
+_python () 
+{ 
+    . '/home/sharfah/.bash/.bash_dyncompletion.d/_python';
+    _python "$@"
+}
+_qdbus () 
+{ 
+    . '/home/sharfah/.bash/.bash_dyncompletion.d/_qdbus';
+    _qdbus "$@"
+}
+_quote_readline_by_ref () 
+{ 
+    . '/home/sharfah/.bash/.bash_dyncompletion.d/_quote_readline_by_ref';
+    _quote_readline_by_ref "$@"
+}
+_rdesktop () 
+{ 
+    . '/home/sharfah/.bash/.bash_dyncompletion.d/_rdesktop';
+    _rdesktop "$@"
+}
+_realcommand () 
+{ 
+    . '/home/sharfah/.bash/.bash_dyncompletion.d/_realcommand';
+    _realcommand "$@"
+}
+_renice () 
+{ 
+    . '/home/sharfah/.bash/.bash_dyncompletion.d/_renice';
+    _renice "$@"
+}
+_reply_compgen_array () 
+{ 
+    . '/home/sharfah/.bash/.bash_dyncompletion.d/_reply_compgen_array';
+    _reply_compgen_array "$@"
+}
+_rfcomm () 
+{ 
+    . '/home/sharfah/.bash/.bash_dyncompletion.d/_rfcomm';
+    _rfcomm "$@"
+}
+_rl_enabled () 
+{ 
+    . '/home/sharfah/.bash/.bash_dyncompletion.d/_rl_enabled';
+    _rl_enabled "$@"
+}
+_rmmod () 
+{ 
+    . '/home/sharfah/.bash/.bash_dyncompletion.d/_rmmod';
+    _rmmod "$@"
+}
+_root_command () 
+{ 
+    . '/home/sharfah/.bash/.bash_dyncompletion.d/_root_command';
+    _root_command "$@"
+}
+_route () 
+{ 
+    . '/home/sharfah/.bash/.bash_dyncompletion.d/_route';
+    _route "$@"
+}
+_rtcwake () 
+{ 
+    . '/home/sharfah/.bash/.bash_dyncompletion.d/_rtcwake';
+    _rtcwake "$@"
+}
+_samba_debuglevel () 
+{ 
+    . '/home/sharfah/.bash/.bash_dyncompletion.d/_samba_debuglevel';
+    _samba_debuglevel "$@"
+}
+_samba_domains () 
+{ 
+    . '/home/sharfah/.bash/.bash_dyncompletion.d/_samba_domains';
+    _samba_domains "$@"
+}
+_samba_hosts () 
+{ 
+    . '/home/sharfah/.bash/.bash_dyncompletion.d/_samba_hosts';
+    _samba_hosts "$@"
+}
+_samba_resolve_order () 
+{ 
+    . '/home/sharfah/.bash/.bash_dyncompletion.d/_samba_resolve_order';
+    _samba_resolve_order "$@"
+}
+_scp () 
+{ 
+    . '/home/sharfah/.bash/.bash_dyncompletion.d/_scp';
+    _scp "$@"
+}
+_scp_local_files () 
+{ 
+    . '/home/sharfah/.bash/.bash_dyncompletion.d/_scp_local_files';
+    _scp_local_files "$@"
+}
+_scp_remote_files () 
+{ 
+    . '/home/sharfah/.bash/.bash_dyncompletion.d/_scp_remote_files';
+    _scp_remote_files "$@"
+}
+_screen () 
+{ 
+    . '/home/sharfah/.bash/.bash_dyncompletion.d/_screen';
+    _screen "$@"
+}
+_screen_sessions () 
+{ 
+    . '/home/sharfah/.bash/.bash_dyncompletion.d/_screen_sessions';
+    _screen_sessions "$@"
+}
+_sdptool () 
+{ 
+    . '/home/sharfah/.bash/.bash_dyncompletion.d/_sdptool';
+    _sdptool "$@"
+}
+_sendevent () 
+{ 
+    . '/home/sharfah/.bash/.bash_dyncompletion.d/_sendevent';
+    _sendevent "$@"
+}
+_service () 
+{ 
+    . '/home/sharfah/.bash/.bash_dyncompletion.d/_service';
+    _service "$@"
+}
+_services () 
+{ 
+    . '/home/sharfah/.bash/.bash_dyncompletion.d/_services';
+    _services "$@"
+}
+_sftp () 
+{ 
+    . '/home/sharfah/.bash/.bash_dyncompletion.d/_sftp';
+    _sftp "$@"
+}
+_sh () 
+{ 
+    . '/home/sharfah/.bash/.bash_dyncompletion.d/_sh';
+    _sh "$@"
+}
+_shells () 
+{ 
+    . '/home/sharfah/.bash/.bash_dyncompletion.d/_shells';
+    _shells "$@"
+}
+_signals () 
+{ 
+    . '/home/sharfah/.bash/.bash_dyncompletion.d/_signals';
+    _signals "$@"
+}
+_smbcacls () 
+{ 
+    . '/home/sharfah/.bash/.bash_dyncompletion.d/_smbcacls';
+    _smbcacls "$@"
+}
+_smbclient () 
+{ 
+    . '/home/sharfah/.bash/.bash_dyncompletion.d/_smbclient';
+    _smbclient "$@"
+}
+_smbcquotas () 
+{ 
+    . '/home/sharfah/.bash/.bash_dyncompletion.d/_smbcquotas';
+    _smbcquotas "$@"
+}
+_smbget () 
+{ 
+    . '/home/sharfah/.bash/.bash_dyncompletion.d/_smbget';
+    _smbget "$@"
+}
+_smbpasswd () 
+{ 
+    . '/home/sharfah/.bash/.bash_dyncompletion.d/_smbpasswd';
+    _smbpasswd "$@"
+}
+_smbtar () 
+{ 
+    . '/home/sharfah/.bash/.bash_dyncompletion.d/_smbtar';
+    _smbtar "$@"
+}
+_smbtree () 
+{ 
+    . '/home/sharfah/.bash/.bash_dyncompletion.d/_smbtree';
+    _smbtree "$@"
+}
+_split_longopt () 
+{ 
+    . '/home/sharfah/.bash/.bash_dyncompletion.d/_split_longopt';
+    _split_longopt "$@"
+}
+_sqlite3 () 
+{ 
+    . '/home/sharfah/.bash/.bash_dyncompletion.d/_sqlite3';
+    _sqlite3 "$@"
+}
+_ssh () 
+{ 
+    . '/home/sharfah/.bash/.bash_dyncompletion.d/_ssh';
+    _ssh "$@"
+}
+_ssh_bindaddress () 
+{ 
+    . '/home/sharfah/.bash/.bash_dyncompletion.d/_ssh_bindaddress';
+    _ssh_bindaddress "$@"
+}
+_ssh_ciphers () 
+{ 
+    . '/home/sharfah/.bash/.bash_dyncompletion.d/_ssh_ciphers';
+    _ssh_ciphers "$@"
+}
+_ssh_copy_id () 
+{ 
+    . '/home/sharfah/.bash/.bash_dyncompletion.d/_ssh_copy_id';
+    _ssh_copy_id "$@"
+}
+_ssh_macs () 
+{ 
+    . '/home/sharfah/.bash/.bash_dyncompletion.d/_ssh_macs';
+    _ssh_macs "$@"
+}
+_ssh_options () 
+{ 
+    . '/home/sharfah/.bash/.bash_dyncompletion.d/_ssh_options';
+    _ssh_options "$@"
+}
+_ssh_suboption () 
+{ 
+    . '/home/sharfah/.bash/.bash_dyncompletion.d/_ssh_suboption';
+    _ssh_suboption "$@"
+}
+_ssh_suboption_check () 
+{ 
+    . '/home/sharfah/.bash/.bash_dyncompletion.d/_ssh_suboption_check';
+    _ssh_suboption_check "$@"
+}
+_sysctl () 
+{ 
+    . '/home/sharfah/.bash/.bash_dyncompletion.d/_sysctl';
+    _sysctl "$@"
+}
+_tar () 
+{ 
+    . '/home/sharfah/.bash/.bash_dyncompletion.d/_tar';
+    _tar "$@"
+}
+_tilde () 
+{ 
+    . '/home/sharfah/.bash/.bash_dyncompletion.d/_tilde';
+    _tilde "$@"
+}
+_tmux () 
+{ 
+    . '/home/sharfah/.bash/.bash_dyncompletion.d/_tmux';
+    _tmux "$@"
+}
+_tune2fs () 
+{ 
+    . '/home/sharfah/.bash/.bash_dyncompletion.d/_tune2fs';
+    _tune2fs "$@"
+}
+_uids () 
+{ 
+    . '/home/sharfah/.bash/.bash_dyncompletion.d/_uids';
+    _uids "$@"
+}
+_umount () 
+{ 
+    . '/home/sharfah/.bash/.bash_dyncompletion.d/_umount';
+    _umount "$@"
+}
+_unpack200 () 
+{ 
+    . '/home/sharfah/.bash/.bash_dyncompletion.d/_unpack200';
+    _unpack200 "$@"
+}
+_update_alternatives () 
+{ 
+    . '/home/sharfah/.bash/.bash_dyncompletion.d/_update_alternatives';
+    _update_alternatives "$@"
+}
+_update_rc_d () 
+{ 
+    . '/home/sharfah/.bash/.bash_dyncompletion.d/_update_rc_d';
+    _update_rc_d "$@"
+}
+_upto () 
+{ 
+    . '/home/sharfah/.bash/.bash_dyncompletion.d/_upto';
+    _upto "$@"
+}
+_upvar () 
+{ 
+    . '/home/sharfah/.bash/.bash_dyncompletion.d/_upvar';
+    _upvar "$@"
+}
+_upvars () 
+{ 
+    . '/home/sharfah/.bash/.bash_dyncompletion.d/_upvars';
+    _upvars "$@"
+}
+_usb_ids () 
+{ 
+    . '/home/sharfah/.bash/.bash_dyncompletion.d/_usb_ids';
+    _usb_ids "$@"
+}
+_user_at_host () 
+{ 
+    . '/home/sharfah/.bash/.bash_dyncompletion.d/_user_at_host';
+    _user_at_host "$@"
+}
+_useradd () 
+{ 
+    . '/home/sharfah/.bash/.bash_dyncompletion.d/_useradd';
+    _useradd "$@"
+}
+_userdel () 
+{ 
+    . '/home/sharfah/.bash/.bash_dyncompletion.d/_userdel';
+    _userdel "$@"
+}
+_usergroup () 
+{ 
+    . '/home/sharfah/.bash/.bash_dyncompletion.d/_usergroup';
+    _usergroup "$@"
+}
+_usermod () 
+{ 
+    . '/home/sharfah/.bash/.bash_dyncompletion.d/_usermod';
+    _usermod "$@"
+}
+_vipw () 
+{ 
+    . '/home/sharfah/.bash/.bash_dyncompletion.d/_vipw';
+    _vipw "$@"
+}
+_vms () 
+{ 
+    . '/home/sharfah/.bash/.bash_dyncompletion.d/_vms';
+    _vms "$@"
+}
+_wvdial () 
+{ 
+    . '/home/sharfah/.bash/.bash_dyncompletion.d/_wvdial';
+    _wvdial "$@"
+}
+_xhost () 
+{ 
+    . '/home/sharfah/.bash/.bash_dyncompletion.d/_xhost';
+    _xhost "$@"
+}
+_xmllint () 
+{ 
+    . '/home/sharfah/.bash/.bash_dyncompletion.d/_xmllint';
+    _xmllint "$@"
+}
+_xmodmap () 
+{ 
+    . '/home/sharfah/.bash/.bash_dyncompletion.d/_xmodmap';
+    _xmodmap "$@"
+}
+_xrandr () 
+{ 
+    . '/home/sharfah/.bash/.bash_dyncompletion.d/_xrandr';
+    _xrandr "$@"
+}
+_xrdb () 
+{ 
+    . '/home/sharfah/.bash/.bash_dyncompletion.d/_xrdb';
+    _xrdb "$@"
+}
+_xsltproc () 
+{ 
+    . '/home/sharfah/.bash/.bash_dyncompletion.d/_xsltproc';
+    _xsltproc "$@"
+}
+dequote () 
+{ 
+    . '/home/sharfah/.bash/.bash_dyncompletion.d/dequote';
+    dequote "$@"
+}
+quote () 
+{ 
+    . '/home/sharfah/.bash/.bash_dyncompletion.d/quote';
+    quote "$@"
+}
+quote_readline () 
+{ 
+    . '/home/sharfah/.bash/.bash_dyncompletion.d/quote_readline';
+    quote_readline "$@"
+}
+complete -F _filedir_xspec oodraw
+complete -F _filedir_xspec elinks
+complete -F _filedir_xspec freeamp
+complete -d pushd
+complete -j -P '"%' -S '"' jobs
+complete -o default -F _longopt grep
+complete -o default -F _longopt ld
+complete -o default -F _longopt sed
+complete -o default -F _longopt split
+complete -F _rfcomm rfcomm
+complete -F _java java
+complete -F _pgrep pidof
+complete -F _smbpasswd smbpasswd
+complete -o default -F _service urandom
+complete -F _update_alternatives alternatives
+complete -F _renice renice
+complete -F _kill kill
+complete -F _fs fs
+complete -F _autosysjobs jobll
+complete -F _autosysjobs jobkill
+complete -F _autosysjobs jobssh
+complete -F _autosysjobs joblog
+complete -F _filedir_xspec playmidi
+complete -A stopped -P '"%' -S '"' bg
+complete -b help
+complete -F _known_hosts rlogin
+complete -o default -F _longopt mv
+complete -F _complete compgen
+complete -F _dfutool dfutool
+complete -F _gcc g++
+complete -F _gcc g77
+complete -o default -F _mii_diag mii-diag
+complete -F _killall killall
+complete -F _service service
+complete -o default -F _service halt
+complete -o default -F _service rmnologin
+complete -F _sh sh
+complete -F _filedir_xspec cdiff
+complete -F _filedir_xspec bibtex
+complete -F _filedir_xspec rgview
+complete -F _filedir_xspec realplay
+complete -F _filedir_xspec xine
+complete -F _filedir_xspec xpdf
+complete -F _known_hosts ftp
+complete -o default -F _longopt grub
+complete -o default -F _longopt pr
+complete -o default -F _longopt strip
+complete -o default -o nospace -F _export export
+complete -F _filefrag filefrag
+complete -F _make gnumake
+complete -F _insmod modprobe
+complete -F _smbget smbget
+complete -F _smbcacls smbcacls
+complete -F _smbtree smbtree
+complete -o default -F _service pppd-dns
+complete -F _useradd useradd
+complete -F _newusers newusers
+complete -F _groupadd groupadd
+complete -F _sysctl sysctl
+complete -F _filedir_xspec oowriter
+complete -F _filedir_xspec chromium-browser
+complete -F _filedir_xspec gqmpeg
+complete -F _filedir_xspec tex
+complete -F _filedir_xspec lzegrep
+complete -u slay
+complete -c which
+complete -o nospace -F _user_at_host ytalk
+complete -o nospace -F _user_at_host finger
+complete -F _command do
+complete -F _command exec
+complete -F _command time
+complete -o bashdefault -F _perldoc perldoc
+complete -F _qdbus qdbus
+complete -o default -F _service checkroot.sh
+complete -o default -F _service console-setup
+complete -F _update_rc_d update-rc.d
+complete -F _filedir_xspec aviplay
+complete -F _filedir_xspec latex
+complete -F _filedir_xspec evince
+complete -F _known_hosts tracepath6
+complete -o default -F _longopt ldd
+complete -o default -F _longopt tac
+complete -o default -F _longopt uname
+complete -F _apt_cache apt-cache
+complete -o nospace -F _alias alias
+complete -o default -F _service avahi-daemon
+complete -o default -F _service sendsigs
+complete -o default -F _service single
+complete -F _vipw vipw
+complete -F _update_alternatives update-alternatives
+complete -F _autosysjobs jobhist
+complete -F _jilgrep jilgrep
+complete -F _filedir_xspec netscape
+complete -F _filedir_xspec acroread
+complete -F _root_command gksudo
+complete -o default -F _longopt bc
+complete -F _hid2hci hid2hci
+complete -F _cardctl cardctl
+complete -F _tune2fs tune2fs
+complete -F _pkg_config pkg-config
+complete -F _xrandr xrandr
+complete -F _filedir_xspec rvim
+complete -F _filedir_xspec makeinfo
+complete -F _filedir_xspec bunzip2
+complete -F _known_hosts tracepath
+complete -F _known_hosts host
+complete -o default -F _longopt nl
+complete -o default -F _longopt tail
+complete -F _mktemp mktemp
+complete -F _javaws javaws
+complete -F _lftp lftp
+complete -F _pm_action pm-suspend
+complete -F _qdbus dcop
+complete -o default -F _service bluetooth
+complete -o default -F _service glibc.sh
+complete -F _lastlog lastlog
+complete -F _ssh ssh
+complete -F _iwconfig iwconfig
+complete -F _filedir_xspec ogg123
+complete -F _command xargs
+complete -o default -F _longopt awk
+complete -o default -F _longopt nm
+complete -o default -F _longopt sha224sum
+complete -F _bzip2 bzip2
+complete -F _chown chown
+complete -o default -F _service stop-bootlogd
+complete -F _chpasswd chpasswd
+complete -F _jobrunhist jobrunhist
+complete -F _filedir_xspec kwrite
+complete -F _filedir_xspec gview
+complete -F _filedir_xspec ps2pdfwr
+complete -F _filedir_xspec qiv
+complete -F _filedir_xspec lrunzip
+complete -F _filedir_xspec zfgrep
+complete -F _filedir_xspec znew
+complete -F _filedir_xspec bzcat
+complete -F _known_hosts ping
+complete -o default -F _longopt expand
+complete -o default -F _longopt who
+complete -F _cardctl pccardctl
+complete -o nospace -F _dd dd
+complete -F _mkisofs genisoimage
+complete -o default -F _gpg gpg
+complete -F _lsof lsof
+complete -F _insmod insmod
+complete -F _insmod modinfo
+complete -o dirnames -F _umount umount
+complete -F _python python2
+complete -o default -F _service powernowd.early
+complete -o default -F _service usplash
+complete -F _filedir_xspec harbour
+complete -F _filedir_xspec lokalize
+complete -F _filedir_xspec amaya
+complete -F _filedir_xspec kate
+complete -F _filedir_xspec xemacs
+complete -F _filedir_xspec dragon
+complete -F _filedir_xspec pdftex
+complete -F _filedir_xspec unlzma
+complete -F _root_command kdesudo
+complete -F _root_command really
+complete -o default -F _longopt cp
+complete -o default -F _longopt mkdir
+complete -o default -F _longopt paste
+complete -F _cpio cpio
+complete -F _dhclient dhclient
+complete -F _python python3
+complete -o default -F _service klogd
+complete -o default -F _service umountfs
+complete -o default -F _service waitnfs.sh
+complete -F _fsql fsql
+complete -F _filedir_xspec hbpp
+complete -F _filedir_xspec rpm2cpio
+complete -F _filedir_xspec pdflatex
+complete -F _filedir_xspec zgrep
+complete -o default -F _longopt bash
+complete -o default -F _longopt df
+complete -o default -F _longopt ln
+complete -o default -F _longopt patch
+complete -F _function declare
+complete -F _chgrp chgrp
+complete -F _dpkg dpkg
+complete -F _lftpget lftpget
+complete -F _rdesktop rdesktop
+complete -o default -F _service anacron
+complete -o default -F _service linux-restricted-modules-common
+complete -o default -F _service ntp
+complete -o default -F _service udev
+complete -F _ssh_copy_id ssh-copy-id
+complete -F _invoke_rc_d invoke-rc.d
+complete -F _filedir_xspec wine
+complete -F _filedir_xspec view
+complete -F _filedir_xspec vi
+complete -F _filedir_xspec unxz
+complete -v unset
+complete -F _known_hosts mtr
+complete -F _command else
+complete -F _command nice
+complete -o default -F _longopt sha512sum
+complete -F _perl perl
+complete -F _pm_is_supported pm-is-supported
+complete -o default -F _service acpi-support
+complete -o default -F _service bootclean
+complete -o default -F _service console-screen.sh
+complete -o default -F _service killprocs
+complete -o default -F _service procps
+complete -F _filedir_xspec ly2dvi
+complete -F _filedir_xspec mozilla-firefox
+complete -F _filedir_xspec mozilla
+complete -u sux
+complete -F _known_hosts traceroute6
+complete -o default -F _longopt objcopy
+complete -F _configure configure
+complete -F _gcc gpc
+complete -F _man man
+complete -o default -F _screen screen
+complete -o default -F _service checkfs.sh
+complete -o default -F _service laptop-mode
+complete -F _userdel userdel
+complete -g groupdel
+complete -F _autosysjobs joboffice
+complete -F _filedir_xspec ooimpress
+complete -F _filedir_xspec opera
+complete -F _filedir_xspec gvim
+complete -F _filedir_xspec uncompress
+complete -F _filedir_xspec zless
+complete -A binding bind
+complete -o default -F _longopt dir
+complete -F _complete complete
+complete -o default -F _service mountkernfs.sh
+complete -o default -F _service skeleton
+complete -F _vms vms
+complete -F _autorep autorep
+complete -F _filedir_xspec modplugplay
+complete -F _filedir_xspec lzgrep
+complete -F _known_hosts ping6
+complete -F _known_hosts fping
+complete -F _root_command gksu
+complete -o default -F _longopt curl
+complete -o default -F _longopt tr
+complete -o default -F _aptitude aptitude
+complete -F _fusermount fusermount
+complete -F _mkisofs mkisofs
+complete -F _gzip pigz
+complete -F _make make
+complete -F _ntpdate ntpdate
+complete -o default -F _service apport
+complete -o default -F _service networking
+complete -o default -F _service vbesave
+complete -F _passwd passwd
+complete -o nospace -F _scp scp
+complete -F _autosysjobs joboffhold
+complete -F _filedir_xspec kid3-qt
+complete -F _filedir_xspec xanim
+complete -F _filedir_xspec zdiff
+complete -F _hciattach hciattach
+complete -F _id id
+complete -o default -F _service acpid
+complete -o default -F _service loopback
+complete -o default -F _service mountall-bootclean.sh
+complete -o default -F _service xserver-xorg-input-wacom
+complete -F _sqlite3 sqlite3
+complete -F _filedir_xspec portecle
+complete -F _filedir_xspec dillo
+complete -F _filedir_xspec aaxine
+complete -F _filedir_xspec dvipdfmx
+complete -F _filedir_xspec advi
+complete -F _filedir_xspec ggv
+complete -u groups
+complete -A setopt set
+complete -F _command nohup
+complete -o default -F _longopt cut
+complete -o default -F _longopt rmdir
+complete -F _man apropos
+complete -F _killall pkill
+complete -F _pgrep pgrep
+complete -o default -F _service gpsd
+complete -o default -F _service oem-config
+complete -o default -F _service pcmciautils
+complete -o default -F _service umountroot
+complete -o default -F _service x11-common
+complete -F _vipw vigr
+complete -F _xmllint xmllint
+complete -F _filedir_xspec oocalc
+complete -F _filedir_xspec emacs
+complete -F _filedir_xspec lzmore
+complete -F _filedir_xspec lzless
+complete -u chfn
+complete -F _growisofs growisofs
+complete -F _gcc gcc
+complete -o default -F _gdb gdb
+complete -F _ifupdown ifdown
+complete -o default -F _service brltty
+complete -o default -F _service mountnfs-bootclean.sh
+complete -o default -F _service mtab.sh
+complete -o default -F _look look
+complete -F _autosysjobs jobice
+complete -F _filedir_xspec fbxine
+complete -F _filedir_xspec kdvi
+complete -F _command eval
+complete -F _command padsp
+complete -o default -F _longopt sha384sum
+complete -F _hciconfig hciconfig
+complete -F _man whatis
+complete -o default -F _mii_tool mii-tool
+complete -F _smbcquotas smbcquotas
+complete -o default -F _service hotkey-setup
+complete -o default -F _service hwclockfirst.sh
+complete -o default -F _service udev-finish
+complete -F _faillog faillog
+complete -F _filedir_xspec poedit
+complete -F _filedir_xspec firefox
+complete -F _filedir_xspec lynx
+complete -F _filedir_xspec ps2pdf
+complete -F _filedir_xspec kpdf
+complete -F _filedir_xspec gv
+complete -F _command command
+complete -F _command vsound
+complete -o default -F _longopt less
+complete -o default -F _longopt vdir
+complete -F _smbclient smbclient
+complete -F _smbtar smbtar
+complete -o default -F _service bootmisc.sh
+complete -F _upto upto
+complete -F _filedir_xspec oomath
+complete -F _filedir_xspec madplay
+complete -F _filedir_xspec compress
+complete -F _known_hosts ssh-installkeys
+complete -o default -F _longopt ptx
+complete -o default -F _longopt sort
+complete -F _dpkg dpkg-deb
+complete -F _lzma lzma
+complete -F _pm_action pm-hibernate
+complete -o default -F _service cron
+complete -F _iwlist iwlist
+complete -F _autosysjobs jobsu
+complete -F _filedir_xspec lilypond
+complete -F _filedir_xspec gtranslator
+complete -F _filedir_xspec jadetex
+complete -F _filedir_xspec zmore
+complete -u write
+complete -j -P '"%' -S '"' fg
+complete -b builtin
+complete -F _command then
+complete -o default -F _longopt csplit
+complete -o default -F _longopt env
+complete -o default -F _longopt fold
+complete -o default -F _longopt seq
+complete -F _aspell aspell
+complete -F _e2label e2label
+complete -F _make gmake
+complete -F _rmmod rmmod
+complete -F _rtcwake rtcwake
+complete -o default -F _service module-init-tools
+complete -o default -F _service rc
+complete -F _ssh autossh
+complete -F _tar tar
+complete -F _autosysjobs jobhold
+complete -F _autosysjobs jobdepends
+complete -F _filedir_xspec iceweasel
+complete -F _filedir_xspec sxemacs
+complete -F _filedir_xspec mpg321
+complete -F _filedir_xspec mpg123
+complete -F _filedir_xspec zcat
+complete -F _filedir_xspec unzip
+complete -F _filedir_xspec pbunzip2
+complete -u runuser
+complete -F _command aoss
+complete -o default -F _longopt head
+complete -o default -F _longopt sha256sum
+complete -o default -F _longopt wc
+complete -F _hcitool hcitool
+complete -F _dumpe2fs dumpe2fs
+complete -F _ifupdown ifup
+complete -o default -F _service rc.local
+complete -o default -F _service umountnfs.sh
+complete -F _chage chage
+complete -F _iwspy iwspy
+complete -F _xmodmap xmodmap
+complete -F _filedir_xspec kid3
+complete -F _filedir_xspec pdfjadetex
+complete -F _filedir_xspec gpdf
+complete -F _filedir_xspec dvipdf
+complete -F _filedir_xspec kghostview
+complete -u w
+complete -F _nslookup nslookup
+complete -F _known_hosts rsh
+complete -F _command ltrace
+complete -o default -F _longopt ls
+complete -o default -F _longopt mknod
+complete -F _bzip2 pbzip2
+complete -o default -F _iconv iconv
+complete -F _isql isql
+complete -o default -F _service hal
+complete -o default -F _service mountall.sh
+complete -o default -F _service pulseaudio
+complete -F _filedir_xspec gharbour
+complete -F _filedir_xspec modplug123
+complete -F _filedir_xspec dvipdfm
+complete -F _filedir_xspec pbzcat
+complete -A shopt shopt
+complete -c type
+complete -F _known_hosts telnet
+complete -F _known_hosts dig
+complete -o default -F _longopt sha1sum
+complete -F _function function
+complete -F _function typeset
+complete -F _chsh chsh
+complete -o default -F _dpkg_reconfigure dpkg-reconfigure
+complete -F _gcc gcj
+complete -o default -F _service mountoverflowtmp
+complete -o default -F _service sysklogd
+complete -o nospace -F _cdrecord wodim
+complete -F _filedir_xspec oobase
+complete -F _filedir_xspec texi2dvi
+complete -F _filedir_xspec texi2html
+complete -F _filedir_xspec zipinfo
+complete -o default -F _longopt du
+complete -o default -F _longopt fmt
+complete -o default -F _longopt od
+complete -o default -F _longopt unexpand
+complete -F _crontab crontab
+complete -F _find find
+complete -F _pm_action pm-suspend-hybrid
+complete -F _pwck pwck
+complete -F _gpasswd gpasswd
+complete -F _tmux tmux
+complete -F _filedir_xspec epiphany
+complete -F _filedir_xspec ps2pdf12
+complete -F _filedir_xspec ee
+complete -F _filedir_xspec lzcat
+complete -v readonly
+complete -o nospace -F _user_at_host talk
+complete -F _known_hosts showmount
+complete -F _avctrl avctrl
+complete -F _gcc cc
+complete -o default -F _openssl openssl
+complete -o default -F _service hostname.sh
+complete -o default -F _service mountdevsubfs.sh
+complete -o default -F _service policykit
+complete -F _ssh slogin
+complete -o nospace -F _cdrecord cdrecord
+complete -F _autosysjobs jobterm
+complete -F _autosysjobs jobstart
+complete -F _filedir_xspec ps2pdf13
+complete -F _filedir_xspec gunzip
+complete -F _root_command fakeroot
+complete -o default -F _longopt netstat
+complete -o default -F _longopt readelf
+complete -o default -F _longopt rm
+complete -F _getent getent
+complete -F _ip ip
+complete -F _pack200 pack200
+complete -o default -F _service alsa-utils
+complete -o default -F _service reboot
+complete -F _usermod usermod
+complete -F _groupmod groupmod
+complete -F _newgrp newgrp
+complete -F _sftp sftp
+complete -F _filedir_xspec google-chrome
+complete -F _filedir_xspec vim
+complete -F _filedir_xspec ps2pdf14
+complete -F _filedir_xspec okular
+complete -F _filedir_xspec dvips
+complete -F _filedir_xspec lzfgrep
+complete -u su
+complete -j -P '"%' -S '"' disown
+complete -F _known_hosts fping6
+complete -o default -F _longopt cat
+complete -o default -F _longopt date
+complete -F _dpkg_source dpkg-source
+complete -F _gzip gzip
+complete -F _unpack200 unpack200
+complete -o default -F _service rcS
+complete -o default -F _service stop-bootlogd-single
+complete -F _xrdb xrdb
+complete -F _filedir_xspec hbrun
+complete -F _filedir_xspec kbabel
+complete -F _filedir_xspec rview
+complete -F _filedir_xspec kaffeine
+complete -F _filedir_xspec slitex
+complete -o nospace -F _cd cd
+complete -o default -F _longopt diff
+complete -o default -F _longopt md5sum
+complete -o default -F _longopt objdump
+complete -o default -F _longopt touch
+complete -o default -F _longopt wget
+complete -F _sdptool sdptool
+complete -F _gcc c++
+complete -o default -F _service wpa-ifupdown
+complete -F _wvdial wvdial
+complete -F _autosysjobs jobls
+complete -F _sendevent sendevent
+complete -F _filedir_xspec galeon
+complete -F _filedir_xspec bzme
+complete -F _filedir_xspec xfig
+complete -F _filedir_xspec xv
+complete -F _filedir_xspec xzcat
+complete -F _filedir_xspec zcmp
+complete -F _known_hosts traceroute
+complete -o default -F _longopt gprof
+complete -o default -F _longopt mkfifo
+complete -o default -F _longopt tee
+complete -F _apt_get apt-get
+complete -F _l2ping l2ping
+complete -F _ciptool ciptool
+complete -F _cancel cancel
+complete -F _make pmake
+complete -F _pm_powersave pm-powersave
+complete -F _python python
+complete -o default -F _service bootlogd
+complete -o default -F _service dbus
+complete -o default -F _service gdm
+complete -o default -F _service hwclock.sh
+complete -F _xhost xhost
+complete -F _filedir_xspec lyx
+complete -F _filedir_xspec rgvim
+complete -F _filedir_xspec timidity
+complete -F _filedir_xspec dvitype
+complete -F _filedir_xspec dviselect
+complete -F _filedir_xspec xdvi
+complete -F _filedir_xspec zegrep
+complete -a unalias
+complete -F _command tsocks
+complete -F _root_command sudo
+complete -o default -F _longopt uniq
+complete -F _badblocks badblocks
+complete -o default -o dirnames -F _mount mount
+complete -F _route route
+complete -o default -F _service cupsys
+complete -o default -F _service dhcdbd
+complete -o default -F _service keyboard-setup
+complete -o default -F _service powernowd
+complete -o default -F _service screen-cleanup
+complete -F _grpck grpck
+complete -F _iwpriv iwpriv
+complete -F _xsltproc xsltproc

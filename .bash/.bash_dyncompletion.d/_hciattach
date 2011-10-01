@@ -1,0 +1,33 @@
+_hciattach () 
+{ 
+    local cur;
+    COMPREPLY=();
+    _get_comp_words_by_ref cur;
+    if [[ "$cur" == -* ]]; then
+        COMPREPLY=($( compgen -W '-n -p -t -b -s -l' -- "$cur" ));
+    else
+        _count_args;
+        case $args in 
+            1)
+                COMPREPLY=($( printf '%s\n' /dev/tty* ));
+                COMPREPLY=($( compgen -W '${COMPREPLY[@]} \
+                    ${COMPREPLY[@]#/dev/}' -- "$cur" ))
+            ;;
+            2)
+                COMPREPLY=($( compgen -W 'any ericsson digi \
+                    xircom csr bboxes swave bcsp 0x0105 \
+                    0x080a 0x0160 0x0002' -- "$cur" ))
+            ;;
+            3)
+                COMPREPLY=($( compgen -W '9600 19200 38400 \
+                    57600 115200 230400 460800 921600' -- "$cur" ))
+            ;;
+            4)
+                COMPREPLY=($( compgen -W 'flow noflow' -- "$cur" ))
+            ;;
+            5)
+                _bluetooth_adresses
+            ;;
+        esac;
+    fi
+}

@@ -1,0 +1,17 @@
+_jobrunhist () 
+{ 
+    local cur=${COMP_WORDS[COMP_CWORD]};
+    local prev=${COMP_WORDS[COMP_CWORD-1]};
+    case "$prev" in 
+        -instance)
+            COMPREPLY=($( compgen -W "$(cat $AUTOSYS_HOSTFILE)" -- $cur ));
+            return 0
+        ;;
+        -J | -job_name)
+            _autosysjobs
+        ;;
+    esac;
+    if [[ "$cur" == -* ]]; then
+        COMPREPLY=($( compgen -W "-job_name -J -job_list -F -instance -runs -raw -verbose -utc" -- $cur ));
+    fi
+}

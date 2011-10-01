@@ -1,0 +1,75 @@
+_hcitool () 
+{ 
+    local cur prev split=false arg;
+    COMPREPLY=();
+    _get_comp_words_by_ref cur prev;
+    _split_longopt && split=true;
+    case $prev in 
+        -i)
+            _bluetooth_devices;
+            return 0
+        ;;
+        --role)
+            COMPREPLY=($( compgen -W 'm s' -- "$cur" ));
+            return 0
+        ;;
+        --pkt-type)
+            _bluetooth_packet_types;
+            return 0
+        ;;
+    esac;
+    $split && return 0;
+    _get_first_arg;
+    if [ -z $arg ]; then
+        if [[ "$cur" == -* ]]; then
+            COMPREPLY=($( compgen -W '--help -i' -- "$cur" ));
+        else
+            COMPREPLY=($( compgen -W 'dev inq scan name info \
+                spinq epinq cmd con cc dc sr cpt rssi lq tpl \
+                afh lst auth enc key clkoff clock' -- "$cur" ));
+        fi;
+    else
+        case $arg in 
+            name | info | dc | rssi | lq | afh | auth | key | clkoff | lst)
+                _count_args;
+                if [ $args -eq 2 ]; then
+                    _bluetooth_adresses;
+                fi
+            ;;
+            cc)
+                if [[ "$cur" == -* ]]; then
+                    COMPREPLY=($( compgen -W '--role --pkt-type' -- "$cur" ));
+                else
+                    _count_args;
+                    if [ $args -eq 2 ]; then
+                        _bluetooth_adresses;
+                    fi;
+                fi
+            ;;
+            sr)
+                _count_args;
+                if [ $args -eq 2 ]; then
+                    _bluetooth_adresses;
+                else
+                    COMPREPLY=($( compgen -W 'master slave' -- "$cur" ));
+                fi
+            ;;
+            cpt)
+                _count_args;
+                if [ $args -eq 2 ]; then
+                    _bluetooth_adresses;
+                else
+                    _bluetooth_packet_types;
+                fi
+            ;;
+            tpl | enc | clock)
+                _count_args;
+                if [ $args -eq 2 ]; then
+                    _bluetooth_adresses;
+                else
+                    COMPREPLY=($( compgen -W '0 1' -- "$cur" ));
+                fi
+            ;;
+        esac;
+    fi
+}

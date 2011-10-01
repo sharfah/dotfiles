@@ -1,0 +1,6 @@
+_root_command () 
+{ 
+    local PATH=$PATH:/sbin:/usr/sbin:/usr/local/sbin;
+    local root_command=$1;
+    _command $1 $2 $3
+}

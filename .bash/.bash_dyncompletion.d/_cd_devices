@@ -1,0 +1,4 @@
+_cd_devices () 
+{ 
+    COMPREPLY=("${COMPREPLY[@]}" $( compgen -f -d -X "!*/?([amrs])cd*" -- "${cur:-/dev/}" ))
+}

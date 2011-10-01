@@ -1,0 +1,40 @@
+_rfcomm () 
+{ 
+    local cur prev;
+    COMPREPLY=();
+    _get_comp_words_by_ref cur prev;
+    case $prev in 
+        -f | --config)
+            _filedir;
+            return 0
+        ;;
+        -i)
+            _bluetooth_devices;
+            _bluetooth_adresses;
+            return 0
+        ;;
+    esac;
+    _get_first_arg;
+    if [ -z $arg ]; then
+        if [[ "$cur" == -* ]]; then
+            COMPREPLY=($( compgen -W '--help -a --raw \
+                --config -i --auth --encrypt --secure --master' -- "$cur" ));
+        else
+            COMPREPLY=($( compgen -W 'show connect listen watch \
+                bind release' -- "$cur" ));
+        fi;
+    else
+        _count_args;
+        if [ $args -eq 2 ]; then
+            _bluetooth_devices;
+        else
+            case $arg in 
+                connect | bind)
+                    if [ $args -eq 3 ]; then
+                        _bluetooth_adresses;
+                    fi
+                ;;
+            esac;
+        fi;
+    fi
+}

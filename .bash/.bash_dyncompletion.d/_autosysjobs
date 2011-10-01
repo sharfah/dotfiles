@@ -1,0 +1,6 @@
+_autosysjobs () 
+{ 
+    local cur=${COMP_WORDS[COMP_CWORD]};
+    [ ! -z ${AUTOSERV} ] && COMPREPLY=($( compgen -W "$(cat ${AUTOSYS_JOBFILE}_${AUTOSERV})" -- $cur ));
+    return 0
+}

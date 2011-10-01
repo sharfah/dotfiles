@@ -1,0 +1,21 @@
+_route () 
+{ 
+    local cur prev;
+    COMPREPLY=();
+    _get_comp_words_by_ref cur prev;
+    if [ "$prev" = dev ]; then
+        _available_interfaces;
+        return 0;
+    fi;
+    local i found;
+    for opt in add del -host -net netmask metric mss window irtt reject mod dyn reinstate dev default gw;
+    do
+        found=false;
+        for ((i=1; i < ${#COMP_WORDS[@]}-1; i++ ))
+        do
+            [ "${COMP_WORDS[i]}" = "$opt" ] && found=true && break;
+        done;
+        $found || COMPREPLY[${#COMPREPLY[@]}]="$opt";
+    done;
+    COMPREPLY=($( compgen -W '"${COMPREPLY[@]}"' -- "$cur" ))
+}

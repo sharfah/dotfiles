@@ -1,0 +1,9 @@
+_ssh_suboption_check () 
+{ 
+    local cureq=`_get_cword :=` preveq=`_get_pword :=`;
+    if [[ $cureq == *=* && $preveq == -o ]]; then
+        _ssh_suboption $cureq;
+        return $?;
+    fi;
+    return 1
+}

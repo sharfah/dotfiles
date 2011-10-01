@@ -1,0 +1,9 @@
+_newgrp () 
+{ 
+    COMPREPLY=();
+    if [[ "`_get_cword`" == "-" ]]; then
+        COMPREPLY=(-);
+    else
+        _allowed_groups;
+    fi
+}

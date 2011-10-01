@@ -1,0 +1,4 @@
+_bluetooth_packet_types () 
+{ 
+    COMPREPLY=($( compgen -W 'DM1 DM3 DM5 DH1 DH3 DH5 HV1 HV2 HV3'         -- "$cur" ))
+}

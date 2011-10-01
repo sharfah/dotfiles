@@ -1,0 +1,28 @@
+_sh () 
+{ 
+    COMPREPLY=();
+    local cur prev;
+    _get_comp_words_by_ref cur prev;
+    case $prev in 
+        -c)
+            return 0
+        ;;
+        -o | +o)
+            COMPREPLY=($( compgen -W 'allexport errexit ignoreeof monitor
+                noclobber noglob noexec nolog notify nounset verbose vi
+                xtrace' -- "$cur" ));
+            return 0
+        ;;
+    esac;
+    local opts="-a -b -C -e -f -h -i -m -n -o -u -v -x";
+    if [[ "$cur" == -* ]]; then
+        COMPREPLY=($( compgen -W "$opts -c -s" -- "$cur" ));
+        return 0;
+    else
+        if [[ "$cur" == +* ]]; then
+            COMPREPLY=($( compgen -W "${opts//-/+}" -- "$cur" ));
+            return 0;
+        fi;
+    fi;
+    _filedir sh
+}

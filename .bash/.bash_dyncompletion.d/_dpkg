@@ -1,0 +1,64 @@
+_dpkg () 
+{ 
+    local cur prev i;
+    COMPREPLY=();
+    _get_comp_words_by_ref cur prev;
+    i=$COMP_CWORD;
+    _expand || return 0;
+    _split_longopt;
+    if [[ $cur != -* ]]; then
+        while [[ $prev != -* && $i != 1 ]]; do
+            i=$((i-1));
+            prev=${COMP_WORDS[i-1]};
+        done;
+    fi;
+    case $prev in 
+        -c | -i | -A | -I | -f | -e | -x | -X | -W | --install | --unpack | --record-avail | --contents | --info | --fsys-tarfile | --field | --control | --extract | --show)
+            _filedir '?(u)deb';
+            return 0
+        ;;
+        -b | --build)
+            _filedir -d;
+            return 0
+        ;;
+        -s | -p | -l | --status | --print-avail | --list)
+            COMPREPLY=($( apt-cache pkgnames "$cur" 2>/dev/null ));
+            return 0
+        ;;
+        -S | --search)
+            _filedir;
+            return 0
+        ;;
+        -r | -L | -P | --remove | --purge | --listfiles)
+            COMPREPLY=($( _comp_dpkg_installed_packages "$cur" ));
+            return 0
+        ;;
+        *)
+            COMPREPLY=($( compgen -W '-i --install --unpack -A --record-avail \
+                --configure -r --remove -P --purge --get-selections \
+                --set-selections --update-avail --merge-avail \
+                --clear-avail  --command-fd --forget-old-unavail -s \
+                --status -p --print-avail -L --listfiles -l --list \
+                -S --search -C --audit --print-architecture \
+                --print-gnu-build-architecture \
+                --print-installation-architecture \
+                --compare-versions --help --version --force-help \
+                --force-all --force-auto-select --force-downgrade \
+                --force-configure-any --force-hold --force-bad-path \
+                --force-not-root --force-overwrite \
+                --force-overwrite-diverted --force-bad-verify \
+                --force-depends-version --force-depends \
+                --force-confnew --force-confold --force-confdef \
+                --force-confmiss --force-conflicts --force-architecture\
+                --force-overwrite-dir --force-remove-reinstreq \
+                --force-remove-essential -Dh \
+                --debug=help --licence --admindir --root --instdir \
+                -O --selected-only -E --skip-same-version \
+                -G --refuse-downgrade -B --auto-deconfigure \
+                --no-debsig --no-act -D --debug --status-fd \
+                -b --build -I --info -f --field -c --contents \
+                -x --extract -X --vextract --fsys-tarfile -e --control \
+                --ignore-depends --abort-after' -- "$cur" ))
+        ;;
+    esac
+}

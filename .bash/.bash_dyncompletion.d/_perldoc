@@ -1,0 +1,30 @@
+_perldoc () 
+{ 
+    local cur prev prefix temp;
+    COMPREPLY=();
+    _get_comp_words_by_ref -n : cur prev;
+    prefix="";
+    if [[ "$cur" == -?* ]]; then
+        temp=$cur;
+        prev=${temp:0:2};
+        cur=${temp:2};
+        prefix=$prev;
+    fi;
+    case $prev in 
+        -f)
+            _perlfunctions "$cur";
+            return 0
+        ;;
+    esac;
+    if [[ "$cur" == -* ]]; then
+        COMPREPLY=($( compgen -W '-h -v -t -u -m -l -F -X -f -q' -- "$cur" ));
+    else
+        if [[ "$cur" != */* ]]; then
+            _perlmodules;
+            COMPREPLY=("${COMPREPLY[@]}" $( compgen -W                 '$( PAGER=/bin/cat man perl |  \
+                sed -ne "/perl.*Perl overview/,/perlwin32/p" | \
+                awk "\$NF=2 { print \$1}" | command grep perl )' -- "$cur" ));
+        fi;
+        _filedir 'p@(l|m|od)';
+    fi
+}

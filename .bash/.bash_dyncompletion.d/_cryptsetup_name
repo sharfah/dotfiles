@@ -1,0 +1,4 @@
+_cryptsetup_name () 
+{ 
+    COMPREPLY=($( compgen -X control -W '$( command ls /dev/mapper )'         -- "$cur" ))
+}

@@ -1,0 +1,19 @@
+_scp_remote_files () 
+{ 
+    local IFS='
+';
+    cur=${cur/\\:/:};
+    local userhost=${cur%%?(\\):*};
+    local path=${cur#*:};
+    path=$( sed -e 's/\\\\\\\('$_scp_path_esc'\)/\\\1/g' <<<"$path" );
+    if [ -z "$path" ]; then
+        path=$(ssh -o 'Batchmode yes' $userhost pwd 2>/dev/null);
+    fi;
+    local files;
+    if [ "$1" = -d ]; then
+        files=$( ssh -o 'Batchmode yes' $userhost             command ls -aF1d "$path*" 2>/dev/null |             sed -e 's/'$_scp_path_esc'/\\\\\\&/g' -e '/[^\/]$/d' );
+    else
+        files=$( ssh -o 'Batchmode yes' $userhost             command ls -aF1d "$path*" 2>/dev/null |             sed -e 's/'$_scp_path_esc'/\\\\\\&/g' -e 's/[*@|=]$//g'             -e 's/[^\/]$/& /g' );
+    fi;
+    COMPREPLY=("${COMPREPLY[@]}" $files)
+}

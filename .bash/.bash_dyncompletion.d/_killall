@@ -1,0 +1,12 @@
+_killall () 
+{ 
+    local cur;
+    COMPREPLY=();
+    _get_comp_words_by_ref cur;
+    if [[ $COMP_CWORD -eq 1 && "$cur" == -* ]]; then
+        _signals;
+    else
+        _pnames;
+    fi;
+    return 0
+}

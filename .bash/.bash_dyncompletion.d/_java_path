@@ -1,0 +1,5 @@
+_java_path () 
+{ 
+    cur=${cur##*:};
+    _filedir '@(jar|zip)'
+}

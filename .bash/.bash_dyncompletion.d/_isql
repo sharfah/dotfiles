@@ -1,0 +1,6 @@
+_isql () 
+{ 
+    local cur;
+    _get_comp_words_by_ref cur;
+    [ -f "$ODBCINI" ] && COMPREPLY=($( command grep \\["$cur" "$ODBCINI" | tr -d \\[\\] ))
+}

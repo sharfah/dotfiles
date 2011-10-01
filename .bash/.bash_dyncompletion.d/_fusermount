@@ -1,0 +1,20 @@
+_fusermount () 
+{ 
+    COMPREPLY=();
+    local cur prev;
+    _get_comp_words_by_ref cur prev;
+    case $prev in 
+        -h | -V | -o)
+            return 0
+        ;;
+        -u)
+            COMPREPLY=($( compgen -W "$( awk                 '{ if ($3 ~ /^fuse\./) print $2 }' /etc/mtab 2>/dev/null )"                 -- "$cur" ));
+            return 0
+        ;;
+    esac;
+    if [[ "$cur" == -* ]]; then
+        COMPREPLY=($( compgen -W '-h -V -o -u -q -z' -- "$cur" ));
+    else
+        _filedir -d;
+    fi
+}

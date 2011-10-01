@@ -1,0 +1,27 @@
+_smbtree () 
+{ 
+    local cur prev split=false;
+    COMPREPLY=();
+    _get_comp_words_by_ref cur prev;
+    _split_longopt && split=true;
+    case $prev in 
+        -s | -A | --authentication-file)
+            _filedir;
+            return 0
+        ;;
+        -l | --log-basename)
+            _filedir -d;
+            return 0
+        ;;
+        -d | --debuglevel)
+            _samba_debuglevel;
+            return 0
+        ;;
+    esac;
+    $split && return 0;
+    if [[ "$cur" == -* ]]; then
+        COMPREPLY=($( compgen -W '-b -D -S -V -s -d --debuglevel -l \
+            --log-basename -N -k -A --authentication-file -U --user\
+            -h --help' -- "$cur" ));
+    fi
+}

@@ -1,0 +1,10 @@
+_hid2hci () 
+{ 
+    local cur;
+    COMPREPLY=();
+    _get_comp_words_by_ref cur;
+    if [[ "$cur" == -* ]]; then
+        COMPREPLY=($( compgen -W '--help --quiet -0 --tohci -1 \
+            --tohid' -- "$cur" ));
+    fi
+}

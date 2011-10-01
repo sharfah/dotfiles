@@ -1,0 +1,16 @@
+_installed_alternatives () 
+{ 
+    local admindir;
+    for i in alternatives dpkg/alternatives rpm/alternatives;
+    do
+        [ -d /var/lib/$i ] && admindir=/var/lib/$i && break;
+    done;
+    for ((i=1; i < COMP_CWORD; i++ ))
+    do
+        if [[ "${COMP_WORDS[i]}" == --admindir ]]; then
+            admindir=${COMP_WORDS[i+1]};
+            break;
+        fi;
+    done;
+    COMPREPLY=($( compgen -W '$( command ls $admindir )' -- "$cur" ))
+}

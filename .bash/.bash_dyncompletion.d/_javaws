@@ -1,0 +1,24 @@
+_javaws () 
+{ 
+    COMPREPLY=();
+    local cur prev;
+    _get_comp_words_by_ref cur prev;
+    case $prev in 
+        -help | -license | -about | -viewer | -arg | -param | -property | -update | -umask)
+            return 0
+        ;;
+        -basedir | -codebase)
+            _filedir -d;
+            return 0
+        ;;
+        -uninstall | -import)
+            _filedir jnlp;
+            return 0
+        ;;
+    esac;
+    if [[ $cur == -* ]]; then
+        COMPREPLY=($( compgen -W "$( _parse_help "$1" -help ) " -- "$cur" ));
+        return 0;
+    fi;
+    _filedir jnlp
+}

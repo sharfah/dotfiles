@@ -1,0 +1,41 @@
+_screen () 
+{ 
+    local cur prev words cword;
+    COMPREPLY=();
+    _get_comp_words_by_ref cur prev words cword;
+    if ((cword > 2)); then
+        case ${words[cword-2]} in 
+            -[dD])
+                _screen_sessions;
+                return 0
+            ;;
+        esac;
+    fi;
+    case $prev in 
+        -[rR])
+            _screen_sessions 'Detached';
+            return 0
+        ;;
+        -[dD])
+            _screen_sessions 'Attached';
+            return 0
+        ;;
+        -x)
+            _screen_sessions;
+            return 0
+        ;;
+        -s)
+            _shells;
+            return 0
+        ;;
+        -c)
+            _filedir;
+            return 0
+        ;;
+    esac;
+    if [[ "$cur" == -* ]]; then
+        COMPREPLY=($( compgen -W '-a -A -c -d -D -e -f -fn -fa -h -i -ln \
+            -list -L -m -O -p -q -r -R -s -S -t -U -v -wipe -x -X --help \
+            --version' -- "$cur" ));
+    fi
+}

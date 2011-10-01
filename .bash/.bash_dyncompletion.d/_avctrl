@@ -1,0 +1,14 @@
+_avctrl () 
+{ 
+    local cur;
+    COMPREPLY=();
+    _get_comp_words_by_ref cur;
+    if [[ "$cur" == -* ]]; then
+        COMPREPLY=($( compgen -W '--help --quiet' -- "$cur" ));
+    else
+        _count_args;
+        if [ $args -eq 1 ]; then
+            COMPREPLY=($( compgen -W 'discover switch' -- "$cur" ));
+        fi;
+    fi
+}

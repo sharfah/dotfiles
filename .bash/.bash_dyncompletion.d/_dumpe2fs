@@ -1,0 +1,21 @@
+_dumpe2fs () 
+{ 
+    COMPREPLY=();
+    local cur prev;
+    _get_comp_words_by_ref cur prev;
+    case $prev in 
+        -o | -V)
+            return 0
+        ;;
+        -i)
+            _filedir;
+            return 0
+        ;;
+    esac;
+    if [[ "$cur" == -* ]]; then
+        COMPREPLY=($( compgen -W '-b -o -f -h -i -x -V' -- "$cur" ));
+        return 0;
+    fi;
+    cur=${cur:=/dev/};
+    _filedir
+}

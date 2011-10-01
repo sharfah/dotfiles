@@ -1,0 +1,13 @@
+_command () 
+{ 
+    local offset i;
+    offset=1;
+    for ((i=1; i <= COMP_CWORD; i++ ))
+    do
+        if [[ "${COMP_WORDS[i]}" != -* ]]; then
+            offset=$i;
+            break;
+        fi;
+    done;
+    _command_offset $offset
+}

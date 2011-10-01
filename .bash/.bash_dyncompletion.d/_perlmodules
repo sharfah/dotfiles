@@ -1,0 +1,5 @@
+_perlmodules () 
+{ 
+    COMPREPLY=($( compgen -P "$prefix" -W "$( $1 ${BASH_SOURCE[0]%/*}/helpers/perl modules $cur )" -- "$cur" ));
+    __ltrim_colon_completions "$prefix$cur"
+}

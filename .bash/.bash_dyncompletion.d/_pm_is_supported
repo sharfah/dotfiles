@@ -1,0 +1,6 @@
+_pm_is_supported () 
+{ 
+    local cur;
+    _get_comp_words_by_ref cur;
+    COMPREPLY=($( compgen -W '--help --suspend --hibernate --suspend-hybrid'         -- "$cur" ))
+}

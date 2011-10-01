@@ -1,0 +1,10 @@
+__ltrim_colon_completions () 
+{ 
+    if [[ "$1" == *:* && ( ${BASH_VERSINFO[0]} -lt 4 || ( ${BASH_VERSINFO[0]} -ge 4 && "$COMP_WORDBREAKS" == *:* ) ) ]]; then
+        local colon_word=${1%${1##*:}};
+        local i=${#COMPREPLY[*]};
+        while [ $((--i)) -ge 0 ]; do
+            COMPREPLY[$i]=${COMPREPLY[$i]#"$colon_word"};
+        done;
+    fi
+}

@@ -1,0 +1,4 @@
+_pgids () 
+{ 
+    COMPREPLY=($( compgen -W '$( command ps axo pgid= )' -- "$cur" ))
+}

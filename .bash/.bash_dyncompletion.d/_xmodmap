@@ -1,0 +1,17 @@
+_xmodmap () 
+{ 
+    COMPREPLY=();
+    local cur prev;
+    _get_comp_words_by_ref cur prev;
+    case $prev in 
+        -display | -e)
+            return 0
+        ;;
+    esac;
+    if [[ "$cur" == -* ]]; then
+        COMPREPLY=($( compgen -W '-display -help -grammar -verbose -quiet -n
+            -e -pm -pk -pke -pp' -- "$cur" ));
+        return 0;
+    fi;
+    _filedir
+}

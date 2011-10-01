@@ -1,0 +1,6 @@
+_bluetooth_services () 
+{ 
+    COMPREPLY=($( compgen -W 'DID SP DUN LAN FAX OPUSH FTP HS HF HFAG \
+        SAP NAP GN PANU HCRP HID CIP A2SRC A2SNK AVRCT AVRTG UDIUE \
+        UDITE SYNCML' -- "$cur" ))
+}

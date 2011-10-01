@@ -1,0 +1,17 @@
+_reply_compgen_array () 
+{ 
+    local i wlist;
+    for i in ${!COMPREPLY[*]};
+    do
+        local q=$(quote "$(printf %q "${COMPREPLY[$i]}")");
+        wlist+=$q'
+';
+    done;
+    local ecur="$cur";
+    ecur="${ecur//\\/\\\\}";
+    ecur="${ecur//\'/\'}";
+    local oldifs=$IFS;
+    IFS='
+' eval 'COMPREPLY=(`compgen -W "$wlist" -- "${ecur}"`)';
+    IFS=$oldifs
+}

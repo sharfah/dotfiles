@@ -1,0 +1,6 @@
+_samba_hosts () 
+{ 
+    if [ -n "${COMP_SAMBA_SCAN:-}" ]; then
+        COMPREPLY=($( compgen -W "$( smbtree -N -S |             sed -ne 's/^[[:space:]]*\\\\*\([^[:space:]]*\).*/\1/p'             )" -- $cur ));
+    fi
+}

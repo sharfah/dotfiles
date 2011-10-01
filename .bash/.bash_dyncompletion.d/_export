@@ -1,0 +1,20 @@
+_export () 
+{ 
+    local cur;
+    COMPREPLY=();
+    _get_comp_words_by_ref cur;
+    case $COMP_LINE in 
+        *=\$*)
+            COMPREPLY=($( compgen -v -P '$' -- "${cur#*=\$}" ))
+        ;;
+        *[^=])
+            COMPREPLY=($( compgen -v -S '=' -- "$cur" ))
+        ;;
+        *=)
+            COMPREPLY=("$( eval echo -n \"$`echo ${cur%=}`\" |
+                ( echo -n \'
+                  sed -e 's/'\''/'\''\\\'\'''\''/g'
+                  echo -n \' ) )")
+        ;;
+    esac
+}

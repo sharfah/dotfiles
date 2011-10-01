@@ -1,0 +1,15 @@
+_java_find_sourcepath () 
+{ 
+    local i;
+    for ((i=1; i < COMP_CWORD; i++ ))
+    do
+        if [[ "${COMP_WORDS[i]}" == -sourcepath ]]; then
+            sourcepath=${COMP_WORDS[i+1]};
+            break;
+        fi;
+    done;
+    if [ -z "$sourcepath" ]; then
+        _java_find_classpath;
+        sourcepath=$classpath;
+    fi
+}

@@ -1,0 +1,21 @@
+_ssh_options () 
+{ 
+    type compopt &>/dev/null && compopt -o nospace;
+    COMPREPLY=($( compgen -S = -W 'AddressFamily BatchMode BindAddress \
+        ChallengeResponseAuthentication CheckHostIP Cipher Ciphers \
+        ClearAllForwardings Compression CompressionLevel ConnectionAttempts \
+        ConnectTimeout ControlMaster ControlPath DynamicForward EscapeChar \
+        ExitOnForwardFailure ForwardAgent ForwardX11 ForwardX11Trusted \
+        GatewayPorts GlobalKnownHostsFile GSSAPIAuthentication \
+        GSSAPIDelegateCredentials HashKnownHosts Host HostbasedAuthentication \
+        HostKeyAlgorithms HostKeyAlias HostName IdentityFile IdentitiesOnly \
+        KbdInteractiveDevices LocalCommand LocalForward LogLevel MACs \
+        NoHostAuthenticationForLocalhost NumberOfPasswordPrompts \
+        PasswordAuthentication PermitLocalCommand Port \
+        PreferredAuthentications Protocol ProxyCommand PubkeyAuthentication \
+        RekeyLimit RemoteForward RhostsRSAAuthentication RSAAuthentication \
+        SendEnv ServerAliveInterval ServerAliveCountMax SmartcardDevice \
+        StrictHostKeyChecking TCPKeepAlive Tunnel TunnelDevice \
+        UsePrivilegedPort User UserKnownHostsFile VerifyHostKeyDNS \
+        VisualHostKey XAuthLocation' -- "$cur" ))
+}

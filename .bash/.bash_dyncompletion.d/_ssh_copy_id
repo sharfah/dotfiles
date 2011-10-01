@@ -1,0 +1,18 @@
+_ssh_copy_id () 
+{ 
+    local cur prev;
+    COMPREPLY=();
+    _get_comp_words_by_ref cur prev;
+    case $prev in 
+        -i)
+            _filedir;
+            return 0
+        ;;
+    esac;
+    if [[ "$cur" == -* ]]; then
+        COMPREPLY=($( compgen -W '-i' -- "$cur" ));
+    else
+        _known_hosts_real -a "$cur";
+    fi;
+    return 0
+}

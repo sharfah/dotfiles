@@ -1,0 +1,45 @@
+_unpack200 () 
+{ 
+    COMPREPLY=();
+    local cur prev;
+    _get_comp_words_by_ref cur prev;
+    case $prev in 
+        '-?' | -h | --help | -V | --version | -J)
+            return 0
+        ;;
+        -H | --deflate-hint)
+            COMPREPLY=($( compgen -W 'true false keep' -- "$cur" ));
+            return 0
+        ;;
+        -l | --log-file)
+            COMPREPLY=($( compgen -W '-' -- "$cur" ));
+            _filedir log;
+            return 0
+        ;;
+    esac;
+    local i pack=false jar=false;
+    for ((i=0; i < ${#COMP_WORDS[@]}-1; i++ ))
+    do
+        case ${COMP_WORDS[i]} in 
+            *.pack | *.pack.gz)
+                pack=true
+            ;;
+            *.jar)
+                jar=true
+            ;;
+        esac;
+    done;
+    if ! $pack; then
+        if [[ "$cur" == -* ]]; then
+            COMPREPLY=($( compgen -W '--deflate-hint= --remove-pack-file \
+                --verbose --quiet --log-file= --help --version' -- "$cur" ));
+            [[ ${#COMPREPLY[@]} -eq 1 && ${COMPREPLY[0]} == *= ]] && type compopt &>/dev/null && compopt -o nospace;
+        else
+            _filedir 'pack?(.gz)';
+        fi;
+    else
+        if ! $jar; then
+            _filedir jar;
+        fi;
+    fi
+}

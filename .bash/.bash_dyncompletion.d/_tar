@@ -1,0 +1,46 @@
+_tar () 
+{ 
+    local cur ext regex tar untar;
+    COMPREPLY=();
+    _get_comp_words_by_ref cur;
+    if [ $COMP_CWORD -eq 1 ]; then
+        COMPREPLY=($( compgen -W 'c t x u r d A' -- "$cur" ));
+        return 0;
+    fi;
+    case ${COMP_WORDS[1]} in 
+        ?(-)[cr]*f)
+            _filedir;
+            return 0
+        ;;
+        +([^IZzJjy])f)
+            ext='@(@(tar|gem|spkg)?(.@(Z|[gx]z|bz?(2)|lzma))|t@([glx]z|bz?(2)))';
+            regex='\(\(tar\|gem\|spkg\)\(\.\(Z\|[gx]z\|bz?(2)\|lzma\)\)\?\|t\([glx]z\|bz2\?\)\)'
+        ;;
+        *[Zz]*f)
+            ext='@(t?(ar.)|gem.|spkg.)@(gz|Z)';
+            regex='\(t\(ar\.\)\?\|gem\.\|spkg\.\)\(gz\|Z\)'
+        ;;
+        *[Ijy]*f)
+            ext='@(@(t?(ar.)|gem.)bz?(2)|spkg)';
+            regex='\(\(t\(ar\.\)\?\|gem\.\)bz2\?\|spkg\)'
+        ;;
+        *[J]*f)
+            ext='@(t?(ar.)|gem.|spkg.)@(lz?(ma)|xz)';
+            regex='\(t\(ar\.\)\?\|gem\.\|spkg\.\)\(lzma\|xz\)\?'
+        ;;
+        *)
+            _filedir;
+            return 0
+        ;;
+    esac;
+    if [[ "$COMP_LINE" == *$ext' ' ]]; then
+        tar=$( sed -e 's/^.* \([^ ]*'$regex'\) .*$/\1/' <<<"$COMP_LINE" );
+        untar=t${COMP_WORDS[1]//[^Izjyf]/};
+        local IFS='
+';
+        COMPREPLY=($( compgen -W "$( printf '%s\n' $( tar $untar $tar             2>/dev/null ) )" -- "$cur" ));
+        return 0;
+    fi;
+    _filedir "$ext";
+    return 0
+}

@@ -1,0 +1,6 @@
+_pm_powersave () 
+{ 
+    local cur;
+    _get_comp_words_by_ref cur;
+    COMPREPLY=($( compgen -W "true false" -- "$cur" ))
+}

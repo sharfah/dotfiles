@@ -1,0 +1,18 @@
+_fsql () 
+{ 
+    local cur=${COMP_WORDS[COMP_CWORD]};
+    local prev=${COMP_WORDS[COMP_CWORD-1]};
+    case "$prev" in 
+        -S)
+            COMPREPLY=($( compgen -W '$(grep ^[A-Z] $SYBASE/interfaces)' -- $cur ));
+            return 0
+        ;;
+        -f | -a | -o)
+            _filedir;
+            return 0
+        ;;
+    esac;
+    if [[ "$cur" == -* ]]; then
+        COMPREPLY=($( compgen -W "- -D -H -I -P -R -S -U -h -u -v -e -E -m 		             -F -N -c -f -a -o -p -T -X -x -b -l -s -t -w" -- $cur ));
+    fi
+}

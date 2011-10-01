@@ -1,0 +1,21 @@
+_lftp () 
+{ 
+    local cur prev;
+    COMPREPLY=();
+    _get_comp_words_by_ref cur prev;
+    case $prev in 
+        -f)
+            _filedir;
+            return 0
+        ;;
+        -c | -h | --help | -v | --version | -e | -u | -p)
+            return 0
+        ;;
+    esac;
+    if [[ "$cur" == -* ]]; then
+        COMPREPLY=($( compgen -W '-f -c --help --version -e -u -p'             -- "$cur" ));
+        return 0;
+    fi;
+    COMPREPLY=($( compgen -W         '$( cut -f 1 -s ~/.lftp/bookmarks 2>/dev/null )' -- "$cur" ));
+    _known_hosts_real "$cur"
+}

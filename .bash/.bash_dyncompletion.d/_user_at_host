@@ -1,0 +1,12 @@
+_user_at_host () 
+{ 
+    local cur;
+    COMPREPLY=();
+    _get_comp_words_by_ref -n : cur;
+    if [[ $cur == *@* ]]; then
+        _known_hosts_real "$cur";
+    else
+        COMPREPLY=($( compgen -u -- "$cur" ));
+    fi;
+    return 0
+}

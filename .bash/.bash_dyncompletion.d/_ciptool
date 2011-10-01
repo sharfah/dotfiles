@@ -1,0 +1,31 @@
+_ciptool () 
+{ 
+    local cur prev;
+    COMPREPLY=();
+    _get_comp_words_by_ref cur prev;
+    case $prev in 
+        -i)
+            _bluetooth_devices;
+            _bluetooth_adresses;
+            return 0
+        ;;
+    esac;
+    _get_first_arg;
+    if [ -z $arg ]; then
+        if [[ "$cur" == -* ]]; then
+            COMPREPLY=($( compgen -W '--help -i' -- "$cur" ));
+        else
+            COMPREPLY=($( compgen -W 'show search connect release \
+                loopback' -- "$cur" ));
+        fi;
+    else
+        case $arg in 
+            connect | release | loopback)
+                _count_args;
+                if [ $args -eq 2 ]; then
+                    _bluetooth_adresses;
+                fi
+            ;;
+        esac;
+    fi
+}

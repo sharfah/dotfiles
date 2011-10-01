@@ -1,0 +1,7 @@
+_cancel () 
+{ 
+    local cur;
+    COMPREPLY=();
+    _get_comp_words_by_ref cur;
+    COMPREPLY=($( compgen -W "$( lpstat | cut -d' ' -f1 )" -- "$cur" ))
+}

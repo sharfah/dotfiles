@@ -1,0 +1,69 @@
+_update_alternatives () 
+{ 
+    local cur prev mode args i;
+    COMPREPLY=();
+    _get_comp_words_by_ref cur prev;
+    case $prev in 
+        --altdir | --admindir)
+            _filedir -d;
+            return 0
+        ;;
+        --help | --usage | --version)
+            return 0
+        ;;
+    esac;
+    for ((i=1; i < COMP_CWORD; i++ ))
+    do
+        if [[ "${COMP_WORDS[i]}" == --@(install|remove|auto|display|config|remove-all|set) ]]; then
+            mode=${COMP_WORDS[i]};
+            args=$(($COMP_CWORD - i));
+            break;
+        fi;
+    done;
+    case $mode in 
+        --install)
+            case $args in 
+                1 | 3)
+                    _filedir
+                ;;
+                2)
+                    _installed_alternatives
+                ;;
+                4)
+
+                ;;
+                *)
+                    case $((args % 4)) in 
+                        0 | 2)
+                            _filedir
+                        ;;
+                        1)
+                            COMPREPLY=($( compgen -W '--slave' -- "$cur" ))
+                        ;;
+                        3)
+                            _installed_alternatives
+                        ;;
+                    esac
+                ;;
+            esac
+        ;;
+        --remove | --set)
+            case $args in 
+                1)
+                    _installed_alternatives
+                ;;
+                2)
+                    _filedir
+                ;;
+            esac
+        ;;
+        --auto | --remove-all | --display | --config)
+            _installed_alternatives
+        ;;
+        *)
+            COMPREPLY=($( compgen -W '--verbose --quiet --help --version \
+                --altdir --admindir --install --remove --auto --display \
+                --config --set' -- "$cur" ))
+        ;;
+    esac
+}

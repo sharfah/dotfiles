@@ -1,0 +1,28 @@
+_gdb () 
+{ 
+    local cur prev;
+    COMPREPLY=();
+    _get_comp_words_by_ref cur prev;
+    if [ $COMP_CWORD -eq 1 ]; then
+        local IFS;
+        _compopt_o_filenames;
+        if [[ "$cur" == */* ]]; then
+            IFS='
+';
+            COMPREPLY=($( PATH="$PATH:." compgen -d -c -- "$cur" ));
+        else
+            IFS=":";
+            local path_array=($(                 sed -e 's/:\{2,\}/:/g' -e 's/^://' -e 's/:$//' <<<"$PATH" ));
+            IFS='
+';
+            COMPREPLY=($( compgen -d -W '$(find "${path_array[@]}" . \
+                -mindepth 1 -maxdepth 1 -not -type d -executable \
+                -printf "%f\\n" 2>/dev/null)' -- "$cur" ));
+        fi;
+    else
+        if [ $COMP_CWORD -eq 2 ]; then
+            prev=${prev##*/};
+            COMPREPLY=($( compgen -fW "$( command ps axo comm,pid |             awk '{if ($1 ~ /^'"$prev"'/) print $2}' )" -- "$cur" ));
+        fi;
+    fi
+}

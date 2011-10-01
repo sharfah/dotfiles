@@ -1,0 +1,18 @@
+_quote_readline_by_ref () 
+{ 
+    if [[ ${1:0:1} == "'" ]]; then
+        if [[ ${BASH_VERSINFO[0]} -ge 4 ]]; then
+            printf -v $2 %s "${1:1}";
+        else
+            printf -v $2 %q "${1:1}";
+            printf -v $2 %q ${!2};
+        fi;
+    else
+        if [[ ${BASH_VERSINFO[0]} -le 3 && ${1:0:1} == '"' ]]; then
+            printf -v $2 %q "${1:1}";
+        else
+            printf -v $2 %q "$1";
+        fi;
+    fi;
+    [[ ${!2:0:1} == '$' ]] && eval $2=${!2}
+}

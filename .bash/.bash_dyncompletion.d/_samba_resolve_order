@@ -1,0 +1,4 @@
+_samba_resolve_order () 
+{ 
+    COMPREPLY=($( compgen -W 'lmhosts host wins bcast' -- "$cur" ))
+}

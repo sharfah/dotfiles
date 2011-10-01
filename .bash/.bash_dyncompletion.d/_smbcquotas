@@ -1,0 +1,27 @@
+_smbcquotas () 
+{ 
+    local cur prev split=false;
+    COMPREPLY=();
+    _get_comp_words_by_ref cur prev;
+    _split_longopt && split=true;
+    case $prev in 
+        -s | -A | --authentication-file)
+            _filedir;
+            return 0
+        ;;
+        -l | --log-basename)
+            _filedir -d;
+            return 0
+        ;;
+        -d | --debuglevel)
+            _samba_debuglevel;
+            return 0
+        ;;
+    esac;
+    $split && return 0;
+    if [[ "$cur" == -* ]]; then
+        COMPREPLY=($( compgen -W '-u -L -F -S -n -t -v -h --help -V \
+            -s --debuglevel --log-basename -N -k \
+            --authentication-file --user' -- "$cur" ));
+    fi
+}

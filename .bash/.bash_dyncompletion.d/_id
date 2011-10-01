@@ -1,0 +1,12 @@
+_id () 
+{ 
+    local cur;
+    COMPREPLY=();
+    _get_comp_words_by_ref cur;
+    if [[ "$cur" == -* ]]; then
+        COMPREPLY=($( compgen -W '-a -g --group -G --groups -n --name\
+            -r --real -u --user --help --version' -- "$cur" ));
+    else
+        COMPREPLY=($( compgen -u "$cur" ));
+    fi
+}

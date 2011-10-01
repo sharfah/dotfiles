@@ -1,0 +1,38 @@
+_filedir_xspec () 
+{ 
+    local IFS cur xspec;
+    IFS='
+';
+    COMPREPLY=();
+    _get_comp_words_by_ref cur;
+    _expand || return 0;
+    xspec=$( awk "/^complete[ \t]+.*[ \t]${1##*/}([ \t]|\$)/ { print \$0; exit }"         "$BASH_COMPLETION" );
+    xspec=${xspec#*-X };
+    xspec=${xspec%% *};
+    local -a toks;
+    local tmp;
+    toks=(${toks[@]-} $(
+        compgen -d -- "$(quote_readline "$cur")" | {
+        while read -r tmp; do
+            # see long TODO comment in _filedir() --David
+            printf '%s\n' $tmp
+        done
+        }
+        ));
+    eval xspec="${xspec}";
+    local matchop=!;
+    if [[ $xspec == !* ]]; then
+        xspec=${xspec#!};
+        matchop=@;
+    fi;
+    [[ ${BASH_VERSINFO[0]} -ge 4 ]] && xspec="$matchop($xspec|${xspec^^})" || xspec="$matchop($xspec|$(printf %s $xspec | tr '[:lower:]' '[:upper:]'))";
+    toks=(${toks[@]-} $(
+        eval compgen -f -X "!$xspec" -- "\$(quote_readline "\$cur")" | {
+        while read -r tmp; do
+            [ -n $tmp ] && printf '%s\n' $tmp
+        done
+        }
+        ));
+    [ ${#toks[@]} -ne 0 ] && _compopt_o_filenames;
+    COMPREPLY=("${toks[@]}")
+}

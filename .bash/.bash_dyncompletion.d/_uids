@@ -1,0 +1,12 @@
+_uids () 
+{ 
+    if type getent &>/dev/null; then
+        COMPREPLY=($( compgen -W '$( getent passwd | cut -d: -f3 )' -- "$cur" ));
+    else
+        if type perl &>/dev/null; then
+            COMPREPLY=($( compgen -W '$( perl -e '"'"'while (($uid) = (getpwent)[2]) { print $uid . "\n" }'"'"' )' -- "$cur" ));
+        else
+            COMPREPLY=($( compgen -W '$( cut -d: -f3 /etc/passwd )' -- "$cur" ));
+        fi;
+    fi
+}

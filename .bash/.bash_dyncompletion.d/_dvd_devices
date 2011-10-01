@@ -1,0 +1,4 @@
+_dvd_devices () 
+{ 
+    COMPREPLY=("${COMPREPLY[@]}" $( compgen -f -d -X "!*/?(r)dvd*" -- "${cur:-/dev/}" ))
+}

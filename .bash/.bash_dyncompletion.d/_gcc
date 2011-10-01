@@ -1,0 +1,27 @@
+_gcc () 
+{ 
+    local cur cc backend;
+    COMPREPLY=();
+    _get_comp_words_by_ref cur;
+    _expand || return 0;
+    case $1 in 
+        gcj)
+            backend=jc1
+        ;;
+        gpc)
+            backend=gpc1
+        ;;
+        *77)
+            backend=f771
+        ;;
+        *)
+            backend=cc1
+        ;;
+    esac;
+    if [[ "$cur" == -* ]]; then
+        cc=$( $1 -print-prog-name=$backend );
+        COMPREPLY=($( compgen -W "$( $cc --help 2>/dev/null |            tr '\t' ' ' |            sed -e '/^  *-/!d' -e 's/ *-\([^ ]*\).*/-\1/' |            sort -u )" -- "$cur" ));
+    else
+        _filedir;
+    fi
+}

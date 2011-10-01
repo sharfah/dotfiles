@@ -1,0 +1,13 @@
+_autorep () 
+{ 
+    local cur=${COMP_WORDS[COMP_CWORD]};
+    local prev=${COMP_WORDS[COMP_CWORD-1]};
+    case "$prev" in 
+        -J)
+            _autosysjobs
+        ;;
+    esac;
+    if [[ "$cur" == -* ]]; then
+        COMPREPLY=($( compgen -W "-J -d -s -q -o -w -r -L -z -G -M -D" -- $cur ));
+    fi
+}

@@ -1,0 +1,63 @@
+_command_offset () 
+{ 
+    local cur func cline cspec noglob cmd i char_offset word_offset _COMMAND_FUNC _COMMAND_FUNC_ARGS;
+    word_offset=$1;
+    local first_word=${COMP_WORDS[$word_offset]};
+    for ((i=0; i <= ${#COMP_LINE}; i++ ))
+    do
+        if [[ "${COMP_LINE:$i:${#first_word}}" == "$first_word" ]]; then
+            char_offset=$i;
+            break;
+        fi;
+    done;
+    COMP_LINE=${COMP_LINE:$char_offset};
+    COMP_POINT=$(( COMP_POINT - $char_offset ));
+    for ((i=0; i <= COMP_CWORD - $word_offset; i++ ))
+    do
+        COMP_WORDS[i]=${COMP_WORDS[i+$word_offset]};
+    done;
+    for ((i; i <= COMP_CWORD; i++ ))
+    do
+        unset COMP_WORDS[i];
+    done;
+    COMP_CWORD=$(( $COMP_CWORD - $word_offset ));
+    COMPREPLY=();
+    _get_comp_words_by_ref cur;
+    if [[ $COMP_CWORD -eq 0 ]]; then
+        _compopt_o_filenames;
+        COMPREPLY=($( compgen -c -- "$cur" ));
+    else
+        cmd=${COMP_WORDS[0]};
+        if complete -p ${cmd##*/} &>/dev/null; then
+            cspec=$( complete -p ${cmd##*/} );
+            if [ "${cspec#* -F }" != "$cspec" ]; then
+                func=${cspec#*-F };
+                func=${func%% *};
+                if [[ ${#COMP_WORDS[@]} -ge 2 ]]; then
+                    $func $cmd "${COMP_WORDS[${#COMP_WORDS[@]}-1]}" "${COMP_WORDS[${#COMP_WORDS[@]}-2]}";
+                else
+                    $func $cmd "${COMP_WORDS[${#COMP_WORDS[@]}-1]}";
+                fi;
+                if [ "${cspec#*-o }" != "$cspec" ]; then
+                    cspec=${cspec#*-o };
+                    cspec=${cspec%% *};
+                    if [[ "$cspec" != @(dir|file)names ]]; then
+                        COMPREPLY=("${COMPREPLY[@]//\\\\:/:}");
+                    else
+                        _compopt_o_filenames;
+                    fi;
+                fi;
+            else
+                if [ -n "$cspec" ]; then
+                    cspec=${cspec#complete};
+                    cspec=${cspec%%${cmd##*/}};
+                    COMPREPLY=($( eval compgen "$cspec" -- "$cur" ));
+                fi;
+            fi;
+        else
+            if [ ${#COMPREPLY[@]} -eq 0 ]; then
+                _filedir;
+            fi;
+        fi;
+    fi
+}

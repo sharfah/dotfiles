@@ -1,0 +1,17 @@
+_l2ping () 
+{ 
+    local cur prev;
+    COMPREPLY=();
+    _get_comp_words_by_ref cur prev;
+    case $prev in 
+        -i)
+            _bluetooth_devices;
+            return 0
+        ;;
+    esac;
+    if [[ "$cur" == -* ]]; then
+        COMPREPLY=($( compgen -W '-i -s -c -t -f -r' -- "$cur" ));
+    else
+        _bluetooth_adresses;
+    fi
+}

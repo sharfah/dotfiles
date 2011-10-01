@@ -1,0 +1,10 @@
+_aspell_dictionary () 
+{ 
+    local datadir;
+    datadir=$( aspell config data-dir 2>/dev/null || echo /usr/lib/aspell );
+    COMPREPLY=($( command ls $datadir/*.alias 2>/dev/null ));
+    COMPREPLY=(${COMPREPLY[@]%.alias});
+    COMPREPLY=(${COMPREPLY[@]#$datadir/});
+    COMPREPLY=("${COMPREPLY[@]}" $( aspell dicts 2>/dev/null ));
+    COMPREPLY=($( compgen -W '${COMPREPLY[@]}' -- "$cur" ))
+}

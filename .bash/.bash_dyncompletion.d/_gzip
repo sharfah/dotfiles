@@ -1,0 +1,39 @@
+_gzip () 
+{ 
+    local cur prev xspec helpopts;
+    COMPREPLY=();
+    _get_comp_words_by_ref cur prev;
+    helpopts=`_parse_help ${COMP_WORDS[0]}`;
+    case $prev in 
+        -b | --blocksize | -p | --processes | -S | --suffix | -h | --help | -V | --version)
+            return 0
+        ;;
+    esac;
+    if [[ "$cur" == -* ]]; then
+        COMPREPLY=($( compgen -W "$helpopts -1 -2 -3 -4 -5 -6 -7 -8 -9"             -- "$cur" ));
+        return 0;
+    fi;
+    local IFS='
+';
+    xspec="*.@(gz|t[ag]z)";
+    if [[ "$prev" == --* ]]; then
+        [[ "$prev" == --decompress || "$prev" == --list || "$prev" == --test ]] && xspec="!"$xspec;
+        [[ "$prev" == --force ]] && xspec=;
+    else
+        if [[ "$prev" == -* ]]; then
+            [[ "$prev" == -*[dlt]* ]] && xspec="!"$xspec;
+            [[ "$prev" == -*f* ]] && xspec=;
+        else
+            if [[ "$prev" == '>' || "$prev" == '>>' ]]; then
+                xspec=;
+            else
+                if [ "$prev" = '<' ]; then
+                    xspec=;
+                fi;
+            fi;
+        fi;
+    fi;
+    _expand || return 0;
+    _compopt_o_filenames;
+    COMPREPLY=($( compgen -f -X "$xspec" -- "$cur" ) $( compgen -d -- "$cur" ))
+}

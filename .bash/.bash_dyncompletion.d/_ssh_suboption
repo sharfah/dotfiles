@@ -1,0 +1,35 @@
+_ssh_suboption () 
+{ 
+    local prev=${1%%=*} cur=${1#*=};
+    case $prev in 
+        BatchMode | ChallengeResponseAuthentication | CheckHostIP | ClearAllForwardings | Compression | ExitOnForwardFailure | ForwardAgent | ForwardX11 | ForwardX11Trusted | GatewayPorts | GSSAPIAuthentication | GSSAPIKeyExchange | GSSAPIDelegateCredentials | GSSAPITrustDns | HashKnownHosts | HostbasedAuthentication | IdentitiesOnly | KbdInteractiveAuthentication | KbdInteractiveDevices | NoHostAuthenticationForLocalhost | PasswordAuthentication | PubkeyAuthentication | RhostsRSAAuthentication | RSAAuthentication | StrictHostKeyChecking | TCPKeepAlive | UsePrivilegedPort | VerifyHostKeyDNS | VisualHostKey)
+            COMPREPLY=($( compgen -W 'yes no' -- "$cur"))
+        ;;
+        AddressFamily)
+            COMPREPLY=($( compgen -W 'any inet inet6' -- "$cur" ))
+        ;;
+        BindAddress)
+            _ssh_bindaddress
+        ;;
+        Cipher)
+            COMPREPLY=($( compgen -W 'blowfish des 3des' -- "$cur" ))
+        ;;
+        Protocol)
+            COMPREPLY=($( compgen -W '1 2 1,2 2,1' -- "$cur" ))
+        ;;
+        Tunnel)
+            COMPREPLY=($( compgen -W 'yes no point-to-point ethernet'                     -- "$cur" ))
+        ;;
+        PreferredAuthentications)
+            COMPREPLY=($( compgen -W 'gssapi-with-mic host-based \
+                    publickey keyboard-interactive password' -- "$cur" ))
+        ;;
+        MACs)
+            _ssh_macs
+        ;;
+        Ciphers)
+            _ssh_ciphers
+        ;;
+    esac;
+    return 0
+}

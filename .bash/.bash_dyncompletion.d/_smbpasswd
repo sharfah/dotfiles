@@ -1,0 +1,28 @@
+_smbpasswd () 
+{ 
+    local cur prev;
+    COMPREPLY=();
+    _get_comp_words_by_ref cur prev;
+    case $prev in 
+        -r)
+            _samba_hosts;
+            return 0
+        ;;
+        -R)
+            _samba_resolve_order;
+            return 0
+        ;;
+        -c)
+            _filedir;
+            return 0
+        ;;
+        -D)
+            _samba_debuglevel;
+            return 0
+        ;;
+    esac;
+    if [[ "$cur" == -* ]]; then
+        COMPREPLY=($( compgen -W '-a -c -x -d -e -D -n -r -R -m -U -h \
+            -s -w -W -i -L' -- "$cur" ));
+    fi
+}

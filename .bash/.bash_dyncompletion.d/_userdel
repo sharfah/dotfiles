@@ -1,0 +1,11 @@
+_userdel () 
+{ 
+    local cur;
+    COMPREPLY=();
+    _get_comp_words_by_ref cur;
+    if [[ "$cur" == -* ]]; then
+        COMPREPLY=($( compgen -W '--force --help --remove' -- "$cur" ));
+        return 0;
+    fi;
+    COMPREPLY=($( compgen -u -- "$cur" ))
+}

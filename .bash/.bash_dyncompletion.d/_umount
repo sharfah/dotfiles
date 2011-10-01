@@ -1,0 +1,14 @@
+_umount () 
+{ 
+    local cur;
+    _get_comp_words_by_ref cur;
+    COMPREPLY=();
+    if [[ $(uname -s) = Linux && -r /proc/mounts ]]; then
+        _linux_fstab < /proc/mounts;
+    else
+        local IFS='
+';
+        COMPREPLY=($( compgen -W '$( mount | cut -d" " -f 3 )' -- "$cur" ));
+    fi;
+    return 0
+}

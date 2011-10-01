@@ -1,0 +1,15 @@
+_java_packages () 
+{ 
+    local sourcepath i;
+    _java_find_sourcepath;
+    cur=${cur//.//};
+    for i in ${sourcepath//:/ };
+    do
+        if [ -d $i ]; then
+            COMPREPLY=("${COMPREPLY[@]}" $( command ls -F -d                 $i/$cur* 2>/dev/null | sed -e 's|^'$i'/||' ));
+        fi;
+    done;
+    COMPREPLY=($( tr " " "\n" <<<"${COMPREPLY[@]}" | command grep "/$" ));
+    COMPREPLY=(${COMPREPLY[@]%/});
+    cur=${COMPREPLY[@]//\//.}
+}

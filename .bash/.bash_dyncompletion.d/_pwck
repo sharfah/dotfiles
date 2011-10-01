@@ -1,0 +1,11 @@
+_pwck () 
+{ 
+    local cur;
+    COMPREPLY=();
+    _get_comp_words_by_ref cur;
+    if [[ "$cur" == -* ]]; then
+        COMPREPLY=($( compgen -W '-q -r -s' -- "$cur" ));
+        return 0;
+    fi;
+    _filedir
+}

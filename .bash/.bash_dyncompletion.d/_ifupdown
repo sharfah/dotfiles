@@ -1,0 +1,11 @@
+_ifupdown () 
+{ 
+    local cur;
+    COMPREPLY=();
+    _get_comp_words_by_ref cur;
+    if [ $COMP_CWORD -eq 1 ]; then
+        _configured_interfaces;
+        COMPREPLY=($(compgen -W '${COMPREPLY[@]}' -- "$cur"));
+    fi;
+    return 0
+}

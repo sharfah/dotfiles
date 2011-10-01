@@ -1,0 +1,24 @@
+_smbget () 
+{ 
+    local cur prev split=false;
+    COMPREPLY=();
+    _get_comp_words_by_ref cur prev;
+    _split_longopt && split=true;
+    case $prev in 
+        -o | -f | --outputfile | --rcfile)
+            _filedir;
+            return 0
+        ;;
+        -d | --debuglevel)
+            _samba_debuglevel;
+            return 0
+        ;;
+    esac;
+    $split && return 0;
+    if [[ "$cur" == -* ]]; then
+        COMPREPLY=($( compgen -W '-a --guest -r --resume -R --recursive -u \
+            --username -p --password -w --workgroup -n --nonprompt -d \
+            --debuglevel -D --dots -P --keep-permissions -o --outputfile -f \
+            --rcfile -q --quiet -v --verbose -b --blocksize -? --help --usage'             -- "$cur" ));
+    fi
+}

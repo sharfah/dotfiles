@@ -1,0 +1,40 @@
+_usergroup () 
+{ 
+    if [[ $cur = *\\\\* || $cur = *:*:* ]]; then
+        return;
+    else
+        if [[ $cur = *\\:* ]]; then
+            local prefix;
+            prefix=${cur%%*([^:])};
+            prefix=${prefix//\\};
+            local mycur="${cur#*[:]}";
+            if [[ $1 == -u ]]; then
+                _allowed_groups "$mycur";
+            else
+                local IFS='
+';
+                COMPREPLY=($( compgen -g -- "$mycur" ));
+            fi;
+            COMPREPLY=($( compgen -P "$prefix" -W "${COMPREPLY[@]}" ));
+        else
+            if [[ $cur = *:* ]]; then
+                local mycur="${cur#*:}";
+                if [[ $1 == -u ]]; then
+                    _allowed_groups "$mycur";
+                else
+                    local IFS='
+';
+                    COMPREPLY=($( compgen -g -- "$mycur" ));
+                fi;
+            else
+                if [[ $1 == -u ]]; then
+                    _allowed_users "$cur";
+                else
+                    local IFS='
+';
+                    COMPREPLY=($( compgen -u -- "$cur" ));
+                fi;
+            fi;
+        fi;
+    fi
+}

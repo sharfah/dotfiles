@@ -1,0 +1,15 @@
+_available_interfaces () 
+{ 
+    local cmd;
+    if [ "${1:-}" = -w ]; then
+        cmd="iwconfig";
+    else
+        if [ "${1:-}" = -a ]; then
+            cmd="ifconfig";
+        else
+            cmd="ifconfig -a";
+        fi;
+    fi;
+    COMPREPLY=($( eval PATH="$PATH:/sbin" $cmd 2>/dev/null |         awk '/^[^ \t]/ { print $1 }' ));
+    COMPREPLY=($( compgen -W '${COMPREPLY[@]/%[[:punct:]]/}' -- "$cur" ))
+}
