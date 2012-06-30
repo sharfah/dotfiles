@@ -31,3 +31,23 @@ set backspace=indent,eol,start
 map <silent> <F10> :set invnumber<cr>
  
 syntax on
+
+" statusline
+" format markers:
+"   %t File name (tail) of file in the buffer
+"   %m Modified flag, text is " [+]"; " [-]" if 'modifiable' is off.
+"   %r Readonly flag, text is " [RO]".
+"   %y Type of file in the buffer, e.g., " [vim]".
+"   %= Separation point between left and right aligned items.
+"   %l Line number.
+"   %L Number of lines in buffer.
+"   %c Column number.
+"   %P percentage through buffer
+set statusline=%t\ %m%r%y%=(ascii=\%03.3b,hex=\%02.2B)\ (%l/%L,%c)\ (%P)
+set laststatus=2
+" change highlighting based on mode
+if version >= 700
+  highlight statusLine cterm=bold ctermfg=black ctermbg=red
+  au InsertLeave * highlight StatusLine cterm=bold ctermfg=black ctermbg=red
+  au InsertEnter * highlight StatusLine cterm=bold ctermfg=black ctermbg=green
+endif
