@@ -3,6 +3,11 @@
 #
 
 #
+# load autosys functions
+#
+. ~/.bash/.bash_autosys_functions
+
+#
 # moves file to ~/.Trash
 # (use instead of rm)
 #
@@ -22,10 +27,31 @@ trash(){
 }
 
 #
+# vertical echo
+#
+echov() {
+    grep -o . <<< "$@"
+}
+ 
+#
+# Run a command quietly. Suppresses all output.
+#
+quietly() { 
+    "$@" > /dev/null 2>&1
+}
+
+#
 # Calculate an expression e.g. calc 1+1
 #
 calc(){ 
-    echo "$@"|bc -l; 
+    bc -l <<< "$@"
+}
+
+#
+# edit an executable script
+#
+vie(){
+    vi $(which $1)
 }
 
 #
@@ -75,7 +101,7 @@ emailme(){
         echo Usage: emailme text
         return 1
     fi
-    echo "$@" | mailx -s "$@" $USER
+    mailx -s "$@" $USER <<< "$@"
     echo "Sent email"
 }
 
@@ -94,7 +120,7 @@ cd_func ()
   local x2 the_new_dir adir index
   local -i cnt
   
-  the_new_dir=$1
+  the_new_dir="$@"
   [[ -z $1 ]] && the_new_dir=$HOME
 
   if [[ ${the_new_dir:0:1} == '-' ]]; then
@@ -163,10 +189,10 @@ up(){
     local result="."
     while [ $levels -gt 0 ]
     do
-        result=$result/..
+        result="$result/.."
         ((levels--))
     done
-    cd $result
+    cd "$result"
 }
 
 #
@@ -177,8 +203,7 @@ upto(){
         echo "Usage: upto <dir>"
         return 1
     fi;
-    local upto=$1;
-    cd "${PWD/\/$upto\/*//$upto}"
+    cd "${PWD/\/$@\/*//$@}"
 }
 
 #
@@ -189,8 +214,28 @@ mkcd() {
          echo "Usage: mkcd <dir>"
          return 1
   else
-         mkdir -p $1 && cd $1
+         mkdir -p "$@" && cd "$_"
   fi
+}
+
+#
+# cd to a directory and ls
+#
+cdl() {
+    cd "$@" && ls -ltr
+}
+
+#
+# prints a ruler the size of the terminal window
+#
+ruler() { 
+    for s in '....^....|' '1234567890'
+    do 
+        w=${#s} 
+ str=$( for (( i=1; $i<=$(( ($COLUMNS + $w) / $w )) ; i=$i+1 )); do echo -n $s; done ) 
+ str=$(echo $str | cut -c -$COLUMNS)
+ echo $str
+    done
 }
 
 #
@@ -234,7 +279,6 @@ dbackup(){
     done
 }
 
-
 #
 # Extract an archive of any type
 #
@@ -272,12 +316,12 @@ roll () {
   if [ "$#" -ne 0 ] ; then
     FILE="$1"
     case "$FILE" in
-      *.tar.bz2|*.tbz2) shift && tar cvjf "$FILE" $* ;;
-      *.tar.gz|*.tgz)   shift && tar cvzf "$FILE" $* ;;
-      *.tar)            shift && tar cvf "$FILE" $* ;;
-      *.zip)            shift && zip "$FILE" $* ;;
-      *.rar)            shift && rar "$FILE" $* ;;
-      *.7z)             shift && 7zr a "$FILE" $* ;;
+      *.tar.bz2|*.tbz2) shift && tar cvjf "$FILE" "$@" ;;
+      *.tar.gz|*.tgz)   shift && tar cvzf "$FILE" "$@" ;;
+      *.tar)            shift && tar cvf "$FILE" "$@" ;;
+      *.zip)            shift && zip -r "$FILE" "$@" ;;
+      *.rar)            shift && rar "$FILE" "$@" ;;
+      *.7z)             shift && 7zr a "$FILE" "$@" ;;
       *)                echo "'$1' cannot be rolled via roll()" ;;
     esac
   else
@@ -285,6 +329,32 @@ roll () {
   fi
 }
 
+#
+# Regex
+#
+regex(){
+ if [ $# -lt 2 ]
+ then
+    echo "Usage: regex pattern input" >&2
+    return 1
+ fi
+ 
+ regex=$1
+ input=$2
+ 
+ if [[ $input =~ $regex ]]
+ then
+    echo "$input matches regex: $regex"
+    #print out capturing groups
+    for (( i=1; i<${#BASH_REMATCH[@]}; i++))
+    do
+        echo -e "\tGroup[$i]: ${BASH_REMATCH[$i]}"
+    done
+ else
+    echo "$input does not match regex: $regex"
+    return 1
+ fi
+}
 
 #
 # XPath
@@ -319,6 +389,13 @@ diffxml(){
         return 1
     fi
     diff -wb <(xmllint --format $1) <(xmllint --format $2)
+}
+
+#
+# print duplicate lines in file
+#
+dupes() { 
+    sort "$@" | uniq -d
 }
 
 #-------------------------------
