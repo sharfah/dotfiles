@@ -1,0 +1,195 @@
+#
+# Autosys Functions
+#
+# contains wrapper functions which 
+# support multiple jobs and job patterns
+#
+
+#
+# Queries autosys for a specified list of jobs or job patterns
+# Param: $@ a list of jobs and/or job patterns
+# Return: JOBS_LIST variable containg a list of resolved jobs
+#         JOBS_PROMPT a flag to indicate if a confirmation prompt is required before execution
+#
+_get_jobs() {
+    input="$@"
+    unset JOBS_LIST
+    unset JOBS_PROMPT
+    
+    # if there is a % in the input,
+    # query autosys for a list of jobs and parse out the first column
+    if [[ "$input" == *%* ]]
+    then
+        output=$(jobls $input)
+        echo "$output"
+        JOBS_LIST=$(awk '{print $1}' <<< "$output" | tail +5 | tr '\n' ' ')
+        JOBS_PROMPT=1
+    else
+        JOBS_LIST=$input
+    fi
+}
+ 
+#
+# Wrapper around an autosys command.
+# Runs the command passed in on each job in the JOBS_LIST variable.
+# Param: $@ the autosys command to run e.g. "autorep -J"
+#
+_run_autosys_cmd() {
+ 
+    if [[ ! $JOBS_LIST ]]
+    then
+        echo "No jobs found" >& 2
+        return 1
+    fi
+ 
+    cmd="$@"
+    if [[ $JOBS_PROMPT ]]
+    then
+        read -p "Execute $cmd on these jobs (y/n)? " -n 1 -r    
+ echo
+        if [[ ! $REPLY =~ ^[Yy]$ ]]    
+        then
+     return 1        
+        fi
+    fi
+    
+    for job in $JOBS_LIST
+    do
+        echo "$cmd $job"
+        $cmd $job
+    done
+}
+ 
+#
+# Lists jobs
+# Param: $@ list of jobs and/or job patterns
+#
+jobls() {
+     first=1
+     for job in "$@"
+     do
+        if [[ $first ]]
+        then
+            autorep $DETAILS -J "$job"
+            unset first
+        else
+            # ignore the header for subsequent jobs
+            if [[ $DETAILS ]]
+            then
+                autorep $DETAILS -J "$job"
+            else 
+                autorep -J "$job" | tail +5
+            fi
+            
+        fi
+     done
+}
+ 
+#
+# Queries job details.
+# Param: $@ list of jobs and/or job patterns
+#
+jobll() {
+     DETAILS="-q"
+     jobls "$@"
+     unset DETAILS
+}
+ 
+#
+# Takes jobs off hold
+# Param: $@ list of jobs and/or job patterns
+#
+joboffhold() {
+     _get_jobs "$@"
+     _run_autosys_cmd "sendevent -E JOB_OFF_HOLD -J"
+}
+ 
+#
+# Takes jobs off ice
+# Param: $@ list of jobs and/or job patterns
+#
+joboffice() {
+     _get_jobs "$@"
+     _run_autosys_cmd "sendevent -E JOB_OFF_ICE -J"
+}
+ 
+#
+# Puts jobs on hold
+# Param: $@ list of jobs and/or job patterns
+#
+jobhold() {
+     _get_jobs "$@"
+     _run_autosys_cmd "sendevent -E JOB_ON_HOLD -J"
+}
+ 
+#
+# Puts jobs on ice
+# Param: $@ list of jobs and/or job patterns
+#
+jobice() {
+     _get_jobs "$@"
+     _run_autosys_cmd "sendevent -E JOB_ON_ICE -J"
+}
+ 
+#
+# Kills jobs
+# Param: $@ list of jobs and/or job patterns
+#
+jobkill() {
+     _get_jobs "$@"
+     _run_autosys_cmd "sendevent -E KILLJOB -J"
+}
+ 
+#
+# Starts jobs
+# Param: $@ list of jobs and/or job patterns
+#
+jobstart() {
+     _get_jobs "$@"
+     _run_autosys_cmd "sendevent -E FORCE_STARTJOB -J"
+}
+ 
+#
+# Changes status of jobs to success
+# Param: $@ list of jobs and/or job patterns
+#
+jobsu() {
+     _get_jobs "$@"
+     _run_autosys_cmd "sendevent -E CHANGE_STATUS -s SUCCESS -J"
+}
+ 
+#
+# Changes status of jobs to terminated
+# Param: $@ list of jobs and/or job patterns
+#
+jobterm() {
+     _get_jobs "$@"
+     _run_autosys_cmd "sendevent -E CHANGE_STATUS -s TERMINATED -J"
+}
+ 
+#
+# Changes status of jobs to inactive
+# Param: $@ list of jobs and/or job patterns
+#
+jobin() {
+     _get_jobs "$@"
+     _run_autosys_cmd "sendevent -E CHANGE_STATUS -s INACTIVE -J"
+}
+ 
+#
+# Displays job dependencies
+# Param: $@ list of jobs and/or job patterns
+#
+jobdepends() {
+     _get_jobs "$@"
+     _run_autosys_cmd "job_depends -c -J"
+}
+ 
+#
+# Displays job history
+# Param: $@ list of jobs and/or job patterns
+#
+jobhist() {
+     _get_jobs "$@"
+     _run_autosys_cmd "jobrunhist -j"
+}
