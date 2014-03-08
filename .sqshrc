@@ -1,0 +1,66 @@
+\set histsize=20
+\set keyword_completion=smart
+\set history_shorthand=on
+\set banner=false
+\set histsave=true
+\set histunique=true
+ 
+\set prompt_color='{1;33}'
+\set text_color='{0;37}'
+\set prompt='${prompt_color}[$histnum][$username@$DSQUERY.$database] $lineno >$text_color '
+\set prompt2='${prompt_color}[sqsh]-->$text_color '
+\alias h='\history'
+
+ 
+# Functions
+ 
+# turns io and time stats on/off
+\func -x stats
+    \if [ $# -ne 1 ]
+        \echo "usage: stats [on | off]"
+        \return 1
+    \fi
+    set statistics io ${1}
+    set statistics time ${1}
+    go
+\done
+ 
+
+# turns plan on/off
+\func -x plan
+    \if [ $# -eq 0 ]
+        \echo "usage: plan [on | off]"
+        \return 1
+    \fi
+    set showplan ${1}
+    go
+\done
+ 
+
+# shortcut for select * from
+\func -x sf
+    \if [ $# -eq 0 ]
+        \echo 'usage: sf "[table [where ...]]"'
+        \return 1
+    \fi
+    select * from $*; | less -F
+\done
+ 
+#  returns top 10 rows of a table
+\func -x head
+    \if [ $# -eq 0 ]
+        \echo 'usage: head "[table [where ...]]"'
+        \return 1
+    \fi
+    select top 10 * from $*;
+\done
+ 
+# count rows in a table
+\func -x count
+    \if [ $# -eq 0 ]
+        \echo 'usage: count "[table [where ...]]"'
+        \return 1
+    \fi
+    select count(*) from $*;
+\done
+
