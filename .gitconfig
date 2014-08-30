@@ -1,0 +1,24 @@
+[user]
+	name = Fahd Shariff
+	email = xxx
+[github]
+	user = sharfah
+	token = xxx
+[alias]
+	st = status
+	co = checkout
+	br = branch
+	df = diff
+	ci = commit
+	ca = commit -a --amend -C HEAD
+	desc = describe
+	rb = rebase -i master --autosquash
+	cp = cherry-pick
+
+	who = shortlog -s --
+	ls = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)[%an]%Creset' --abbrev-commit --date=relative
+	ll = log --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)[%an]%Creset' --decorate --numstat
+	ld = log --pretty=format:'%C(red)%h %Cgreen%ad%C(yellow)%d %Creset%s%C(bold blue) [%cn]%Creset' --decorate --date=short
+
+	# list aliases
+	la = "!git config -l | grep alias | cut -c 7-"
